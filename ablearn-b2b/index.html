@@ -197,6 +197,9 @@
       display: grid; gap: 32px;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     }
+    @media (min-width: 768px) {
+      .work-process-grid { grid-template-columns: 1.35fr 1fr; }
+    }
     
     .section-title { 
       font-size: 2.25rem; margin-bottom: 32px; border-bottom: 2px solid var(--border); 
@@ -428,7 +431,7 @@
 
     <!-- WORKING & PROCESS -->
     <section class="reveal" aria-label="근무 조건 및 채용 절차">
-      <div class="content-grid">
+      <div class="content-grid work-process-grid">
         <div>
           <h2 class="section-title" style="font-size:1.75rem;">근무 조건</h2>
           <details open>
@@ -444,9 +447,15 @@
             <summary>근무 시간 및 장소</summary>
             <div class="details-content">
               <ul class="check-list" style="margin-bottom: 0;">
-                <li><strong>유연 근무제</strong>: 시차 출퇴근, 재택근무(사무실 주 3회 출근) 가능</li>
-                <li><strong>근무시간</strong>: 주 5일 / 오전 10시 ~ 오후 7시 (1일 8시간, 주 5일 근무)</li>
-                <li style="margin-bottom: 0;"><strong>근무지</strong>: 서울 마포구 성암로 330, DMC첨단산업센터 B동 315호</li>
+                <li style="margin-bottom: 16px;"><strong>유연 근무제</strong><br>
+                  <span style="display: inline-block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">• 시차 출퇴근, 재택근무(사무실 주 3회 출근) 가능</span>
+                </li>
+                <li style="margin-bottom: 16px;"><strong>근무시간</strong><br>
+                  <span style="display: inline-block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">• 주 5일 / 오전 10시 ~ 오후 7시 (1일 8시간, 주 5일 근무)</span>
+                </li>
+                <li style="margin-bottom: 0;"><strong>근무지</strong><br>
+                  <span style="display: inline-block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">• 서울 마포구 성암로 330, DMC첨단산업센터 B동 315호</span>
+                </li>
               </ul>
             </div>
           </details>
