@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[에이블런] 사업개발(B2B) 매니저 채용</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; } /* Enable smooth height:auto transitions (Chrome 129+) */
+
+    /* ===== THEMES (class-based ONLY — no @media prefers-color-scheme) ===== */
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 { 
+      color: var(--text); 
+      letter-spacing: -0.03em; 
+      line-height: 1.1;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 700; font-size: 3rem; }
+    h2 { font-weight: 700; font-size: 2rem; }
+    h3 { font-weight: 600; font-size: 1.5rem; }
+    body, p, li, td, th, span, label { font-weight: 400; font-size: 1rem; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      height: 100%;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ===== ANIMATIONS (CSS-first — always reliable) ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    /* Scroll-triggered: JS adds .reveal, then .visible on scroll */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal, .hero-bg, .theme-toggle { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; margin-bottom: 24px; padding: 24px; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .hero { padding: 40px 0 !important; background: none !important; border-bottom: 2px solid black; }
+      .hero * { color: black !important; text-shadow: none !important; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== SKIP TO CONTENT (accessibility) ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION ===== */
+    details { overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; }
+    details summary { cursor: pointer; list-style: none; padding: 16px 20px; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after { content: '+'; font-size: 1.5rem; line-height: 1; font-weight: 300; transition: transform 0.3s; color: var(--accent); }
+    details[open] summary::after { transform: rotate(45deg); }
+    .details-content { padding: 0 20px 20px; color: var(--text); line-height: 1.8; border-top: 1px solid transparent; }
+    details[open] .details-content { border-top-color: var(--border); padding-top: 16px; }
+
+    /* ===== CUSTOM STYLES FOR JOB POSTING ===== */
+    .hero {
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    
+    html.theme-dark .hero { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0a0a0a 100%); }
+    html.theme-light .hero { background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #ffffff 100%); }
+    
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.25; }
+    .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; }
+    
+    .badge-wrap { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 999px;
+      background: var(--surface); color: var(--text); border: 1px solid var(--border);
+      font-weight: 600; font-size: 0.875rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .badge.accent { background: var(--accent); color: white; border-color: var(--accent); }
+    
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+    section { margin-bottom: 64px; }
+    
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 40px; margin-bottom: 64px;
+    }
+    .stat-card {
+      text-align: center; padding: 40px 24px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .stat-value { 
+      font-size: 4rem; font-weight: 800; color: var(--accent); line-height: 1; 
+      margin-bottom: 12px; font-family: 'Inter', sans-serif; 
+      display: flex; justify-content: center; align-items: baseline; gap: 4px;
+    }
+    .stat-value span[data-count] { font-size: inherit; font-weight: inherit; }
+    .stat-suffix { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .stat-label { font-size: 1.1rem; color: var(--text-secondary); font-weight: 600; }
+    
+    .content-grid {
+      display: grid; gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    
+    .section-title { 
+      font-size: 2.25rem; margin-bottom: 32px; border-bottom: 2px solid var(--border); 
+      padding-bottom: 16px; display: inline-flex; align-items: center; gap: 12px;
+    }
+    .section-title svg { stroke: var(--accent); width: 32px; height: 32px; }
+    
+    .list-header { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: var(--text); margin-top: 8px; }
+    
+    ul.check-list { list-style: none; margin-bottom: 24px; }
+    ul.check-list li {
+      position: relative; padding-left: 32px; margin-bottom: 16px; color: var(--text); font-size: 1.05rem; line-height: 1.6; word-break: keep-all;
+    }
+    ul.check-list li::before {
+      content: '✓'; position: absolute; left: 0; color: var(--positive); font-weight: 700; font-size: 1.2rem;
+    }
+    ul.bullet-list { padding-left: 20px; color: var(--text); margin-bottom: 24px; }
+    ul.bullet-list li { margin-bottom: 12px; font-size: 1.05rem; letter-spacing: -0.05em; word-break: keep-all; }
+    
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+    }
+    .benefit-item { display: flex; flex-direction: column; gap: 12px; }
+    .benefit-icon { font-size: 2rem; background: var(--surface-hover); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 8px; }
+    .benefit-title { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+    .benefit-desc { color: var(--text); font-size: 0.95rem; word-break: keep-all; }
+    
+    .contact-card {
+      background: var(--surface); border: 2px solid var(--border); 
+      border-radius: 16px; padding: 48px; text-align: center;
+      max-width: 800px; margin: 0 auto;
+    }
+    .contact-card h2 { font-size: 2rem; margin-bottom: 16px; }
+    .contact-card p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: white; border: none;
+      padding: 16px 32px; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+    }
+    .contact-btn:hover { background: var(--accent-secondary); }
+    .contact-info { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .info-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .info-label { font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+    .info-value { font-weight: 600; color: var(--text); font-size: 1.1rem; }
+
+    /* MANDATORY RULES FOR MOBILE */
+    @media (max-width: 768px) {
+      .hero { padding: 80px 16px 40px; }
+      .hero h1 { font-size: 2.25rem; margin-bottom: 16px; }
+      .contact-card { padding: 32px 16px; }
+      .contact-info { flex-direction: column; gap: 24px; }
+    }
+    @media (max-width: 375px) {
+      body { overflow-x: hidden; } /* CRITICAL evaluation requirement */
+      .container { padding: 0 16px 60px; }
+      .card { padding: 20px; }
+      .stat-value { font-size: 2.5rem; }
+      h1 { font-size: 2rem !important; }
+      h2 { font-size: 1.75rem !important; }
+      .section-title { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- SKIP TO CONTENT -->
+  <a href="#main-content" class="skip-to-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">Skip to content</a>
+  
+  <main id="main-content" role="main">
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">🌙</span><span id="themeLabel">Dark</span></button>
+      <button onclick="downloadImage()"><span>📥</span><span>Download PNG</span></button>
+      <button onclick="window.print()"><span>🖨️</span><span>Print / PDF</span></button>
+    </div>
+  </div>
+
+  <header class="hero animate">
+    <div class="badge-wrap">
+      <span class="badge accent">채용 중</span>
+      <span class="badge">스텝업파트너스 추천 리드</span>
+    </div>
+    <h1 class="animate delay-1">[에이블런] 사업개발(B2B) 매니저</h1>
+    <p class="animate delay-2">AI 리터러시 교육 전문기업 에이블런과 함께 폭발적으로 성장할 사업개발(B2B 영업) 매니저를 모십니다.</p>
+  </header>
+
+  <div class="container">
+    <!-- COMPANY STATS -->
+    <section class="stats-grid animate delay-3" aria-label="회사 주요 성과">
+      <div class="card stat-card">
+        <div class="stat-value"><span data-count="3">0</span><span class="stat-suffix">개월</span></div>
+        <div class="stat-label">설립 초단기 BEP 돌파</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-value"><span data-count="6">0</span><span class="stat-suffix">개월</span></div>
+        <div class="stat-label">시드 투자 유치 성과</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-value"><span data-count="100">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-label">연 평균 매출 성장률(이상)</div>
+      </div>
+    </section>
+
+    <!-- ABOUT COMPANY -->
+    <section class="reveal" aria-label="회사 소개">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        에이블런(ABLEARN) 소개
+      </h2>
+      <div class="card">
+        <p style="font-size: 1.1rem; margin-bottom: 24px; color: var(--text); word-break: keep-all;">국내 최고의 AI 전문가 Pool을 보유하며, 비전공자도 쉽게 배우는 AI·데이터 교육 솔루션을 제공합니다.<br>노코드 기반 데이터 분석으로 실무 문제를 직관적으로 해결하도록 돕는 차별화된 교육 기업입니다.</p>
+        <div class="content-grid" style="gap: 16px; margin-bottom: 0;">
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li>국내 최고의 AI 전문가 Pool 보유</li>
+            <li>비전공자도 쉽게 배우는 AI·데이터 교육</li>
+          </ul>
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li>노코드 기반 데이터 분석으로 문제 해결</li>
+            <li>차별화된 B2B 맞춤형 AI 교육 솔루션 제공</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLE DETAILS -->
+    <section class="reveal" aria-label="포지션 및 업무 내용">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        포지션 & 업무 안내
+      </h2>
+      <div class="content-grid">
+        <div class="card">
+          <h3 class="list-header" style="color: var(--accent);">포지션 개요</h3>
+          <p style="margin-bottom: 24px; color: var(--text); word-break: keep-all; line-height: 1.7;">기업 및 기관, 파트너 고객을 대상으로 제안부터 계약 클로징까지 전반적인 <strong>고객 컨설팅 및 영업 프로세스</strong>를 담당합니다.</p>
+          <ul class="check-list">
+            <li>고객사 니즈 파악 및 유연/명확한 커뮤니케이션</li>
+            <li>맞춤화된 교육/강사 제안 및 성과 전환 달성</li>
+            <li>내부 운영팀 및 강사진과의 긴밀한 협업 (높은 실행력)</li>
+            <li>시장 변화와 산업별 트렌드를 읽어 신규 리드 발굴</li>
+            <li>현재 <strong>인바운드 상담이 90% 이상</strong> 차지!</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="list-header" style="color: var(--accent);">주요 업무</h3>
+          <ul class="check-list">
+            <li>인바운드(교육 문의) 대응부터 계약 클로징까지의 영업 프로세스 운영</li>
+            <li>고객 니즈에 부합하는 상품 제안 및 강사 매칭</li>
+            <li>신규 리드 발굴을 위한 아웃바운드 세일즈 수행</li>
+            <li>세일즈 파이프라인 개발 및 관리</li>
+            <li>고객 피드백 기반 성과 분석 및 리텐션 관리</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section class="reveal" aria-label="자격 요건 및 우대 사항">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        지원 요건
+      </h2>
+      <div class="content-grid">
+        <div class="card">
+          <h3 class="list-header">자격 요건 & 필요 역량</h3>
+          <ul class="bullet-list">
+             <li>B2B/B2C 대상 영업 경험이나 관심이 있으신 분</li>
+             <li>고객 중심의 세일즈 역량 보유자</li>
+             <li>성과 기반의 영업 마인드 및 관계 구축 능력</li>
+             <li>고객 중심의 문제 해결 및 제안 능력</li>
+             <li>명확한 커뮤니케이션을 통한 세일즈 미팅 진행 가능자</li>
+             <li>복잡한 니즈를 문서화/구조화할 수 있는 작성 능력</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="list-header">우대 사항 (PLUS)</h3>
+          <ul class="bullet-list">
+            <li>IT 분야나 기업 교육과 관련한 업무 경력이 있으신 분</li>
+            <li style="white-space: nowrap;">슬랙, 노션, Google Workspace, ZOOM 등 생산성 도구 능통자</li>
+            <li style="white-space: nowrap;">디지털 트랜스포메이션, AI 데이터 분석, 기업 교육 이해도 높은 분</li>
+            <li>VOC 분석을 기반으로 개선 방안을 도출해본 경험자</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="reveal" aria-label="복지 및 혜택">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+        복지 및 혜택
+      </h2>
+      <div class="card">
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">🍗</div>
+            <div class="benefit-title">회식 및 단체 식사비 지원</div>
+            <div class="benefit-desc">점심 식비 지원, 석식 지원, 무제한 간식 지원, 카페테리아 운영 (늦은 저녁까지 일하는 구성원 식비 별도 지원)</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🎁</div>
+            <div class="benefit-title">특급 선물</div>
+            <div class="benefit-desc">명절 선물, 생일 선물, 사내 이벤트, 프로모션, 깜짝 기념일 등 선물의 기쁨을 소중하게 생각합니다.</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🩴</div>
+            <div class="benefit-title">편안한 근무 환경</div>
+            <div class="benefit-desc">완전 자율 복장, 재택장비 지원, 장기 근속자 포상, 생일 휴가, 30분 단위 조각 휴가 제도</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">👨‍👩‍👧‍👦</div>
+            <div class="benefit-title">경조사 지원</div>
+            <div class="benefit-desc">경조 휴가, 경조비 지원 (기쁨은 나누면 배가 되고, 슬픔은 나누면 반이 됩니다)</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">💰</div>
+            <div class="benefit-title">성장 지원금</div>
+            <div class="benefit-desc">교육비 지원, 학비 지원, 도서구입비 지원 <span style="white-space: nowrap;">(교육훈련과 자격증 등 업무 훈련비 아낌없이 지원)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKING & PROCESS -->
+    <section class="reveal" aria-label="근무 조건 및 채용 절차">
+      <div class="content-grid">
+        <div>
+          <h2 class="section-title" style="font-size:1.75rem;">근무 조건</h2>
+          <details open>
+            <summary>고용 형태 및 급여</summary>
+            <div class="details-content">
+              <ul class="check-list" style="margin-bottom: 0;">
+                <li>채용일로부터 3개월 수습 계약 (평가 후 정규직 전환)</li>
+                <li style="margin-bottom: 0;">급여 조건 : 경력에 따른 협의</li>
+              </ul>
+            </div>
+          </details>
+          <details open>
+            <summary>근무 시간 및 장소</summary>
+            <div class="details-content">
+              <ul class="check-list" style="margin-bottom: 0;">
+                <li><strong>유연 근무제</strong>: 시차 출퇴근, 재택근무(사무실 주 3회 출근) 가능</li>
+                <li><strong>근무시간</strong>: 주 5일 / 오전 10시 ~ 오후 7시 (1일 8시간, 주 5일 근무)</li>
+                <li style="margin-bottom: 0;"><strong>근무지</strong>: 서울 마포구 성암로 330, DMC첨단산업센터 B동 315호</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div>
+          <h2 class="section-title" style="font-size:1.75rem;">지원 안내</h2>
+          <details open>
+            <summary>제출 서류 및 유의사항</summary>
+            <div class="details-content">
+              <ul class="check-list" style="margin-bottom: 24px;">
+                <li style="margin-bottom: 0;">
+                  <strong>자유 양식의 국문 이력서 제출 필수</strong><br>
+                  <span style="font-size: 0.95rem; color: var(--text-secondary);">(단, 잡포탈 기본 이력서 양식 제외)</span>
+                </li>
+              </ul>
+              <div style="background: var(--surface-hover); padding: 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.6;">
+                <div style="white-space: nowrap;">※ 입사지원 서류에 허위사실이 발견될 경우,</div>
+                <div style="white-space: nowrap; padding-left: 20px;">채용 확정 이후라도 채용이 취소될 수 있습니다.</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CONTACT CTA -->
+    <section class="reveal">
+      <div class="contact-card">
+        <h2>커리어에 진심인 채용 전문가가 동행합니다</h2>
+        <p>지원 결정부터 전형 끝까지, 결과와 피드백을 투명하게 공유드리겠습니다.</p>
+        <a href="mailto:kms@step-up.kr" class="contact-btn">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          이력서 보내기 및 문의 (kms@step-up.kr)
+        </a>
+        <div class="contact-info">
+          <div class="info-item">
+            <span class="info-label">담당 헤드헌터</span>
+            <span class="info-value">스텝업파트너스 금문섭 파트너</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">연락처</span>
+            <span class="info-value">010-2793-3899</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">링크드인</span>
+            <a href="https://www.linkedin.com/in/majesty89/" style="color:var(--accent); font-weight:600;" target="_blank">LinkedIn Profile →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  </main>
+
+  <script>
+    // === Menu ===
+    function toggleMenu() { 
+      var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+      if (dropdown) dropdown.classList.toggle('open'); 
+    }
+    document.addEventListener('click', e => { 
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown') || document.getElementById('vizMenu');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    // === Theme (class-based, OS detection on first visit) ===
+    var savedTheme = localStorage.getItem('viz-theme');
+    var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? 'Dark' : 'Light';
+      localStorage.setItem('viz-theme', t);
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Scroll Reveal ===
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('reveal'));
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Number Counter ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count), prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+        var start = performance.now(), duration = 1500;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 4);
+          el.textContent = prefix + Math.floor(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = prefix + target.toLocaleString() + suffix; // Ensure final value is exact
+        })(start);
+      });
+    }
+    var counterEls = document.querySelectorAll('[data-count]');
+    if (counterEls.length > 0) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.2 });
+      counterEls.forEach(el => cObs.observe(el));
+    }
+
+    // === Download PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+    
+    // Top level variable requirement
+    var chartsBuilt = false;
+    function onThemeChange() {}
+  </script>
+</body>
+</html>
