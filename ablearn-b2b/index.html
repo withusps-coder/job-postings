@@ -262,6 +262,47 @@
       h2 { font-size: 1.75rem !important; }
       .section-title { font-size: 1.75rem; }
     }
+
+    /* ===== PROCESS TIMELINE ===== */
+    .process-container {
+      display: flex; flex-direction: column; gap: 16px; padding: 16px 0 0;
+    }
+    @media (min-width: 768px) {
+      .process-container { flex-direction: row; align-items: stretch; justify-content: space-between; gap: 12px; }
+    }
+    .process-item {
+      flex: 1; background: var(--surface-hover); border-radius: 12px; padding: 24px 16px; text-align: center; position: relative;
+      border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    }
+    .process-item.active {
+      background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.3);
+    }
+    .process-item.final {
+      background: var(--accent); border-color: var(--accent); box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+    }
+    .process-number {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--surface); color: var(--accent); border: 2px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
+      margin-bottom: 12px; font-size: 0.9rem;
+    }
+    .process-item.active .process-number {
+      background: var(--accent); border-color: var(--accent); color: white;
+    }
+    .process-item.final .process-number {
+      background: white; border-color: white; color: var(--accent);
+    }
+    .process-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 12px; word-break: keep-all; }
+    .process-item.final .process-title { color: white; }
+    .process-text { font-size: 0.9rem; color: var(--text-secondary); word-break: keep-all; line-height: 1.45; }
+    .process-item.final .process-text { color: rgba(255,255,255,0.9); }
+    .process-arrow {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .process-arrow {
+        display: flex; align-items: center; color: var(--border);
+      }
+    }
   </style>
 </head>
 <body>
@@ -477,6 +518,48 @@
               </div>
             </div>
           </details>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PROCESS TIMELINE -->
+    <section class="reveal" aria-label="전형 절차">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        전형 절차
+      </h2>
+      <div class="card" style="padding: 24px 32px 32px;">
+        <div class="process-container">
+          <div class="process-item">
+            <div class="process-number">1</div>
+            <div class="process-title">서류 전형</div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item active">
+            <div class="process-number">2</div>
+            <div class="process-title">사전 서면인터뷰</div>
+            <div class="process-text">보다 상세한 경력과 스토리를 듣기 위한 단계입니다.<br><span style="font-size: 0.8rem; margin-top: 4px; display: inline-block;">※ 약 30~60분 소요</span></div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item">
+            <div class="process-number">3</div>
+            <div class="process-title">대면 인터뷰</div>
+            <div class="process-text">직무핏, 컬처핏 등을 서로 심도있게 맞추어봅니다.</div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item">
+            <div class="process-number">4</div>
+            <div class="process-title">커피챗 / 식사미팅</div>
+            <div class="process-text"><span style="font-size: 0.85rem;">※ 경력직에 한함</span></div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item final">
+            <div class="process-number">5</div>
+            <div class="process-title">최종 합격</div>
+          </div>
+        </div>
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.95rem; color: var(--text-secondary); text-align: center;">
+          ※ 선발 절차 중 일부는 포지션 및 고용 형태에 따라 생략될 수 있습니다.
         </div>
       </div>
     </section>
