@@ -168,9 +168,9 @@
     
     .badge-wrap { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
     .badge {
-      display: inline-flex; align-items: center; padding: 6px 16px; border-radius: 999px;
+      display: inline-flex; align-items: center; padding: 10px 24px; border-radius: 999px;
       background: var(--surface); color: var(--text); border: 1px solid var(--border);
-      font-weight: 600; font-size: 0.875rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-weight: 700; font-size: 1.05rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .badge.accent { background: var(--accent); color: white; border-color: var(--accent); }
     
@@ -354,7 +354,7 @@
     <!-- ABOUT COMPANY -->
     <section class="reveal" aria-label="회사 소개">
       <h2 class="section-title">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        <img src="./logo-ablearn.png" alt="에이블런 로고" style="height: 32px; width: auto; object-fit: contain; margin-top: -4px;">
         에이블런(ABLEARN) 소개
       </h2>
       <div class="card">
@@ -369,30 +369,42 @@
             <li>차별화된 B2B 맞춤형 AI 교육 솔루션 제공</li>
           </ul>
         </div>
-        <div style="margin-top: 32px; padding: 24px; background: var(--surface-hover); border-radius: 12px; display: flex; flex-direction: column; gap: 16px; font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
-          <div style="display: flex; align-items: flex-start; gap: 16px;">
-            <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">기업명</div>
-            <div style="color: var(--text);">에이블런(ABLEARN)</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; gap: 16px;">
-            <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">임직원 수</div>
-            <div style="color: var(--text);">약 30명</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; gap: 16px;">
-            <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">본사 위치</div>
-            <div style="color: var(--text);">서울 마포구 성암로 330, DMC첨단산업센터</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; gap: 16px;">
-            <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">홈페이지</div>
-            <div style="color: var(--text);">
-              <a href="https://ablearn.kr" target="_blank" style="color: var(--accent); text-decoration: none;">https://ablearn.kr</a>
+        <div style="margin-top: 32px; padding: 24px; background: var(--surface-hover); border-radius: 12px; display: flex; flex-wrap: wrap; gap: 32px;">
+          <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
+            <div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">기업명</div>
+                <div style="color: var(--text-secondary);">에이블런(ABLEARN)</div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">임직원 수</div>
+                <div style="color: var(--text-secondary);">약 30명</div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">본사 위치</div>
+                <div style="color: var(--text-secondary);">서울 마포구 성암로 330, DMC첨단산업센터</div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">홈페이지</div>
+                <div style="color: var(--text-secondary);">
+                  <a href="https://ablearn.kr" target="_blank" style="color: var(--accent); text-decoration: none;">https://ablearn.kr</a>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 16px;">
+              <a href="./ablearn-company-profile.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--text); padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); font-weight: 600; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                에이블런 회사소개서 보기 / 다운로드
+              </a>
             </div>
           </div>
-          <div style="margin-top: 16px;">
-            <a href="./ablearn-company-profile.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--text); padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); font-weight: 600; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              에이블런 회사소개서 보기 / 다운로드
-            </a>
+          <div style="flex: 1; min-width: 300px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center;">
+             <object data="./ablearn-company-profile.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="320px" style="display: block;">
+               <div style="padding: 24px; text-align: center; color: var(--text-secondary); line-height: 1.6;">
+                 <p>모바일 기기 등 브라우저 환경에 따라<br>PDF 미리보기가 지원되지 않을 수 있습니다.</p>
+                 <a href="./ablearn-company-profile.pdf" target="_blank" style="color: var(--accent); text-decoration: underline;">좌측 하단 버튼을 눌러보세요.</a>
+               </div>
+             </object>
           </div>
         </div>
       </div>
@@ -593,6 +605,7 @@
     <!-- CONTACT CTA -->
     <section class="reveal">
       <div class="contact-card">
+        <img src="./logo-stepup.png" alt="스텝업파트너스 로고" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 24px;">
         <h2>커리어에 진심인 채용 전문가가 동행합니다</h2>
         <p>지원 결정부터 전형 끝까지, 결과와 피드백을 투명하게 공유드리겠습니다.</p>
         <a href="mailto:kms@step-up.kr" class="contact-btn">
