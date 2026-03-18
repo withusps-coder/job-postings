@@ -192,6 +192,15 @@
       .section-title { font-size: 1.5rem; }
     }
 
+    /* ===== NEWS SECTION ===== */
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+    .news-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 12px; text-decoration: none; display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+    .news-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
+    .news-tag { display: inline-block; padding: 4px 10px; background: rgba(59,130,246,0.1); color: var(--accent); border-radius: 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 12px; width: fit-content; }
+    .news-text { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.6; margin-bottom: 16px; word-break: keep-all; }
+    .news-link { font-size: 0.85rem; font-weight: 600; color: var(--accent-secondary); display: flex; align-items: center; gap: 4px; }
+    @media (max-width: 768px) { .news-grid { grid-template-columns: 1fr; } }
+
     .process-container { display: flex; flex-direction: column; gap: 16px; padding: 16px 0 0; }
     @media (min-width: 768px) { .process-container { flex-direction: row; align-items: stretch; justify-content: space-between; gap: 12px; } }
     .process-item { flex: 1; background: var(--surface-hover); border-radius: 12px; padding: 24px 16px; text-align: center; position: relative; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
@@ -284,6 +293,33 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- NEWS & PRESS -->
+    <section class="reveal" aria-label="회사 뉴스 및 성과">
+      <div class="news-grid" style="margin-top: -80px;">
+        <a href="https://www.news1.kr/industry/distribution/5894642" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">2025 수상</span>
+            <p class="news-text">패션아울렛 부문 '올해의 브랜드 대상'<br>21년 연속 수상 — 소비자 87만 명 투표 선정</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+        <a href="https://www.hankyung.com/article/2025090267401" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">신사업 확장</span>
+            <p class="news-text">AI·VFX 기술 접목 체험형 공간으로<br>오프라인 리테일 콘텐츠 혁신 주도</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+        <a href="https://www.hankyung.com/article/2025102092471" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">성장 전략</span>
+            <p class="news-text">패션·외식·문화 아우른 복합 공간으로 진화,<br>'고객감동경영대상' 수상</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
       </div>
     </section>
 
@@ -408,28 +444,33 @@
         <div class="benefits-grid">
           <div class="benefit-item">
             <div class="benefit-icon">🌴</div>
-            <div class="benefit-title">휴가 제도</div>
-            <div class="benefit-desc">연차, 반차, 경조휴가, 산전후휴가, 육아휴직, 자유로운 연차 사용</div>
+            <div class="benefit-title">리프레시</div>
+            <div class="benefit-desc">연차, 반차, 경조휴가제, 산전 후 휴가, 육아휴직, 휴양시설 제공</div>
           </div>
           <div class="benefit-item">
-            <div class="benefit-icon">🎁</div>
-            <div class="benefit-title">선물 및 경조사</div>
-            <div class="benefit-desc">명절선물, 생일선물, 각종 경조사 지원</div>
+            <div class="benefit-icon">💰</div>
+            <div class="benefit-title">지원금/보험</div>
+            <div class="benefit-desc">각종 경조사 지원, 통신비 지원</div>
           </div>
           <div class="benefit-item">
             <div class="benefit-icon">🍽️</div>
-            <div class="benefit-title">식사 지원</div>
-            <div class="benefit-desc">아침식사 제공, 저녁식사 제공, 음료(차·커피) 제공</div>
+            <div class="benefit-title">교육/생활</div>
+            <div class="benefit-desc">아침식사 제공, 저녁식사 제공, 음료 제공(차·커피), 창립일 행사, 명절선물, 생일선물</div>
           </div>
           <div class="benefit-item">
             <div class="benefit-icon">🏢</div>
             <div class="benefit-title">근무 환경</div>
-            <div class="benefit-desc">전용사옥, 휴게실, 회의실, 사원증 및 사무용품 지급, 주차장 제공, 야간교통비 지급</div>
+            <div class="benefit-desc">전용사옥, 휴게실, 회의실, 사원증 및 사무용품 지급</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🚗</div>
+            <div class="benefit-title">출퇴근</div>
+            <div class="benefit-desc">야간교통비 지급, 주차장 제공</div>
           </div>
           <div class="benefit-item">
             <div class="benefit-icon">🤝</div>
             <div class="benefit-title">조직 문화</div>
-            <div class="benefit-desc">수평적 조직문화, 야근 강요 없음, 창립일 행사, 통신비 지원, 휴양시설 제공</div>
+            <div class="benefit-desc">자유로운 연차 사용, 야근 강요 없음, 수평적 조직문화</div>
           </div>
         </div>
       </div>
