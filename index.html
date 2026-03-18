@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채용 공고 | 스텝업파트너스</title>
+  <meta name="description" content="스텝업파트너스가 추천하는 성장하는 기업의 채용 공고를 확인하세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.07);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981;
+    }
+    html.theme-light {
+      --bg: #F8F9FB; --surface: #FFFFFF; --surface-hover: #F1F3F6;
+      --border: rgba(0,0,0,0.07);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ===== THEME TOGGLE ===== */
+    .theme-btn {
+      position: fixed; top: 16px; right: 16px; z-index: 9999;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.2s;
+    }
+    .theme-btn:hover { background: var(--surface-hover); transform: scale(1.05); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 72px 24px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    html.theme-light .hero {
+      background: linear-gradient(160deg, #EEF2FF 0%, #F8F9FB 60%, #F0FDF4 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    html.theme-dark .hero {
+      background: linear-gradient(160deg, #0f172a 0%, #0A0A0A 60%, #0a1628 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-logo {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 36px; text-decoration: none;
+    }
+    .hero-logo-mark {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+    }
+    .hero-logo-mark svg { width: 22px; height: 22px; stroke: white; }
+    .hero-logo-name {
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1.15;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      font-size: 1.2rem; color: var(--text-secondary);
+      max-width: 520px; margin: 0 auto 40px; word-break: keep-all; line-height: 1.7;
+    }
+    .hero-stats {
+      display: inline-flex; gap: 40px; flex-wrap: wrap; justify-content: center;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; }
+    .hero-stat-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px; }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main { max-width: 1100px; margin: 0 auto; padding: 48px 32px 100px; }
+
+    /* ===== FILTER ===== */
+    .filter-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      margin-bottom: 32px;
+    }
+    .filter-label {
+      font-size: 0.95rem; font-weight: 600; color: var(--text-secondary);
+      letter-spacing: 0; margin-right: 4px;
+    }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: 0.95rem; font-weight: 500;
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent); border-color: var(--accent);
+      color: white; font-weight: 600;
+    }
+    .filter-divider {
+      width: 1px; height: 20px; background: var(--border); margin: 0 4px;
+    }
+
+    /* ===== JOBS HEADER ===== */
+    .jobs-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .jobs-count {
+      font-size: 0.875rem; color: var(--text-secondary);
+    }
+    .jobs-count strong { color: var(--text); font-weight: 600; }
+
+    /* ===== JOB LIST ===== */
+    .jobs-grid { display: flex; flex-direction: column; }
+
+    .job-card {
+      display: block; text-decoration: none; color: inherit;
+      padding: 28px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      border-radius: 4px;
+    }
+    .job-card:first-child { border-top: 1px solid var(--border); }
+    .job-card:hover { background: var(--surface-hover); }
+
+    .job-title {
+      font-size: 1.55rem; font-weight: 700; color: var(--text);
+      letter-spacing: -0.03em; line-height: 1.3; word-break: keep-all;
+      margin-bottom: 10px;
+    }
+
+    .job-meta {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 0; font-size: 1rem; color: var(--text-secondary);
+    }
+    .job-meta-item { white-space: nowrap; }
+    .job-meta-sep {
+      margin: 0 12px;
+      border-left: 1px solid var(--border); height: 13px; display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      text-align: center; padding: 80px 24px; display: none;
+    }
+    .empty-state.show { display: block; }
+    .empty-state svg { width: 48px; height: 48px; stroke: var(--border); margin-bottom: 16px; }
+    .empty-state p { color: var(--text-secondary); font-size: 1rem; }
+    .empty-reset {
+      margin-top: 16px; padding: 8px 20px; border-radius: 8px;
+      background: var(--accent); color: white; border: none;
+      font-family: inherit; font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; transition: opacity 0.15s;
+    }
+    .empty-reset:hover { opacity: 0.85; }
+
+    /* ===== FOOTER CTA ===== */
+    .footer-cta {
+      margin-top: 80px; padding: 48px 32px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; text-align: center;
+    }
+    .footer-cta h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.03em; }
+    .footer-cta p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.05rem; word-break: keep-all; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: white; text-decoration: none;
+      padding: 16px 32px; border-radius: 10px; font-size: 1.05rem; font-weight: 600;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .cta-btn svg { width: 18px; height: 18px; stroke: white; }
+    .footer-contact {
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+      margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border);
+    }
+    .fc-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .fc-label { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); font-weight: 600; }
+    .fc-value { font-size: 1.2rem; font-weight: 600; color: var(--text); }
+    .fc-value a { color: var(--accent); text-decoration: none; }
+    .fc-value a:hover { text-decoration: underline; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate { animation: fadeInUp 0.5s ease-out both; }
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 640px) {
+      .hero { padding: 56px 20px 48px; }
+      .hero h1 { font-size: 1.8rem; }
+      .main { padding: 28px 16px 60px; }
+      .footer-cta { padding: 32px 20px; }
+      .footer-contact { gap: 24px; }
+      .filter-bar { gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- THEME TOGGLE -->
+  <button class="theme-btn" onclick="cycleTheme()" id="themeBtn" aria-label="테마 변경">☀️</button>
+
+  <!-- HERO -->
+  <header class="hero animate">
+    <a href="https://step-up.kr" class="hero-logo" target="_blank">
+      <div class="hero-logo-mark">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+        </svg>
+      </div>
+      <span class="hero-logo-name">StepUp Partners</span>
+    </a>
+    <h1 class="animate delay-1">당신의 <em>다음 스텝</em>, 함께 고민하겠습니다</h1>
+    <p class="hero-sub animate delay-2">스텝업파트너스가 엄선한 포지션을 확인하세요.</p>
+    <div class="hero-stats animate delay-3">
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="cntJobs">0</div>
+        <div class="hero-stat-label">진행 중인 공고</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">피드백 제공</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">무료</div>
+        <div class="hero-stat-label">지원자 수수료</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+
+<!-- FILTERS -->
+    <div class="filter-bar" id="filterBar">
+      <span class="filter-label">직군</span>
+      <button class="filter-btn active" data-filter="category" data-value="전체">전체</button>
+      <!-- dynamic buttons injected here -->
+    </div>
+
+    <!-- JOBS COUNT -->
+    <div class="jobs-header">
+      <span class="jobs-count"><strong id="visibleCount">0</strong>개의 공고</span>
+    </div>
+
+    <!-- JOB CARDS -->
+    <div class="jobs-grid" id="jobsGrid"></div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <p>조건에 맞는 공고가 없습니다.</p>
+      <button class="empty-reset" onclick="resetFilters()">필터 초기화</button>
+    </div>
+
+    <!-- FOOTER CTA -->
+    <div class="footer-cta">
+      <h2>원하는 포지션이 없으신가요?</h2>
+      <p>이력서를 보내주시면 새 공고가 등록될 때 가장 먼저 안내드리겠습니다.</p>
+      <a href="mailto:kms@step-up.kr?subject=이력서 등록 및 채용 문의" class="cta-btn">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        이력서 보내기
+      </a>
+      <div class="footer-contact">
+        <div class="fc-item">
+          <span class="fc-label">담당 헤드헌터</span>
+          <span class="fc-value">금문섭 파트너</span>
+        </div>
+        <div class="fc-item">
+          <span class="fc-label">이메일</span>
+          <span class="fc-value"><a href="mailto:kms@step-up.kr">kms@step-up.kr</a></span>
+        </div>
+        <div class="fc-item">
+          <span class="fc-label">연락처</span>
+          <span class="fc-value">010-2793-3899</span>
+        </div>
+        <div class="fc-item">
+          <span class="fc-label">링크드인</span>
+          <span class="fc-value"><a href="https://www.linkedin.com/in/majesty89/" target="_blank">LinkedIn →</a></span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+  /* ================================================================
+     JOB DATA — 새 공고 추가 시 이 배열에 객체를 추가하면 됩니다
+     ================================================================ */
+  const JOBS = [
+    {
+      id: "ablearn-b2b",
+      title: "[에이블런] 사업개발(B2B) 매니저",
+      meta: ["사업개발(BD)", "B2B영업", "경력 무관", "정규직", "에이블런"],
+      category: "영업",
+      url: "./ablearn-b2b/index.html"
+    }
+    // 예시) 새 공고 추가:
+    // {
+    //   id: "company-role",
+    //   title: "[회사명] 포지션명",
+    //   meta: ["팀명", "직무", "경력 조건", "고용형태", "회사명"],  // | 구분자로 표시됨
+    //   category: "영업",  // 영업 | 개발 | 마케팅 | 디자인 | 기획 | 경영지원
+    //   url: "./company-role/index.html"
+    // }
+  ];
+
+  /* ================================================================
+     STATE
+     ================================================================ */
+  let activeCategory = "전체";
+
+  /* ================================================================
+     INIT
+     ================================================================ */
+  function init() {
+    buildFilters();
+    renderJobs();
+    animateHeroCount();
+
+  }
+
+  /* ================================================================
+     BUILD FILTER BUTTONS (직군 기준)
+     ================================================================ */
+  function buildFilters() {
+    const categories = [...new Set(JOBS.map(j => j.category))];
+    const bar = document.getElementById("filterBar");
+    categories.forEach(cat => {
+      const btn = document.createElement("button");
+      btn.className = "filter-btn";
+      btn.dataset.filter = "category";
+      btn.dataset.value = cat;
+      btn.textContent = cat;
+      btn.addEventListener("click", () => setCategory(cat));
+      bar.appendChild(btn);
+    });
+
+    // bind "전체" button
+    bar.querySelector('[data-value="전체"]').addEventListener("click", () => setCategory("전체"));
+  }
+
+  function setCategory(val) {
+    activeCategory = val;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.value === val);
+    });
+    renderJobs();
+  }
+
+  function resetFilters() {
+    setCategory("전체");
+    searchQuery = "";
+    document.getElementById("searchInput").value = "";
+    renderJobs();
+  }
+
+  /* ================================================================
+     RENDER JOBS
+     ================================================================ */
+  function renderJobs() {
+    const filtered = JOBS.filter(j => {
+      return activeCategory === "전체" || j.category === activeCategory;
+    });
+
+    const grid = document.getElementById("jobsGrid");
+    const empty = document.getElementById("emptyState");
+
+    document.getElementById("visibleCount").textContent = filtered.length;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = "";
+      empty.classList.add("show");
+      return;
+    }
+    empty.classList.remove("show");
+
+    grid.innerHTML = filtered.map(j => {
+      const metaHtml = j.meta.map((m, idx) =>
+        `<span class="job-meta-item">${m}</span>${idx < j.meta.length - 1 ? '<span class="job-meta-sep"></span>' : ''}`
+      ).join("");
+      return `
+        <a class="job-card" href="${j.url}">
+          <div class="job-title">${j.title}</div>
+          <div class="job-meta">${metaHtml}</div>
+        </a>
+      `;
+    }).join("");
+  }
+
+  /* ================================================================
+     HERO COUNT ANIMATION
+     ================================================================ */
+  function animateHeroCount() {
+    const el = document.getElementById("cntJobs");
+    const target = JOBS.length;
+    const start = performance.now();
+    const duration = 800;
+    (function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.ceil(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    })(start);
+  }
+
+  /* ================================================================
+     THEME
+     ================================================================ */
+  var currentTheme = localStorage.getItem("viz-theme") ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+  function applyTheme(t) {
+    document.documentElement.className = "theme-" + t;
+    document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
+    localStorage.setItem("viz-theme", t);
+    currentTheme = t;
+  }
+  function cycleTheme() { applyTheme(currentTheme === "dark" ? "light" : "dark"); }
+  applyTheme(currentTheme);
+
+  /* ================================================================
+     START
+     ================================================================ */
+  init();
+  </script>
+</body>
+</html>
