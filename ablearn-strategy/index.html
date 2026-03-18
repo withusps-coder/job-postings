@@ -41,7 +41,7 @@
     h3 { font-weight: 600; font-size: 1.5rem; }
     body, p, li, td, th, span, label { font-weight: 400; font-size: 1rem; }
     p,li,td,th,span,label { color: var(--text); }
-    .text-secondary { color: var(--text-secondary); }
+    .text-secondary { opacity: 0.72; }
 
     .card {
       background: var(--surface); border: 1px solid var(--border);
@@ -123,7 +123,7 @@
     html.theme-light .hero { background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #ffffff 100%); }
 
     .hero h1 { font-size: clamp(1.75rem, 4.5vw, 3rem); margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.25; }
-    .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 1200px; margin: 0 auto 32px; word-break: keep-all; }
+    .hero p { font-size: 1.25rem; opacity: 0.72; max-width: 1200px; margin: 0 auto 32px; word-break: keep-all; }
 
     .badge-wrap { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
     .badge {
@@ -148,7 +148,7 @@
     }
     .stat-value span[data-count] { font-size: inherit; font-weight: inherit; }
     .stat-suffix { font-size: 1.5rem; font-weight: 700; color: var(--text); }
-    .stat-label { font-size: 1.1rem; color: var(--text-secondary); font-weight: 600; }
+    .stat-label { font-size: 1.1rem; opacity: 0.72; font-weight: 600; }
 
     .content-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
     @media (min-width: 768px) { .work-process-grid { grid-template-columns: 1.35fr 1fr; } }
@@ -179,7 +179,7 @@
       max-width: 800px; margin: 0 auto;
     }
     .contact-card h2 { font-size: 2rem; margin-bottom: 16px; }
-    .contact-card p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px; }
+    .contact-card p { font-size: 1.1rem; opacity: 0.72; margin-bottom: 32px; }
     .contact-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       background: var(--accent); color: white; border: none;
@@ -189,7 +189,7 @@
     .contact-btn:hover { background: var(--accent-secondary); }
     .contact-info { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
     .info-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .info-label { font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+    .info-label { font-size: 0.875rem; opacity: 0.72; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
     .info-value { font-weight: 600; color: var(--text); font-size: 1.1rem; }
 
     .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
@@ -231,7 +231,7 @@
     .process-item.final .process-number { background: white; border-color: white; color: var(--accent); }
     .process-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 12px; word-break: keep-all; }
     .process-item.final .process-title { color: white; }
-    .process-text { font-size: 0.9rem; color: var(--text-secondary); word-break: keep-all; line-height: 1.45; }
+    .process-text { font-size: 0.9rem; opacity: 0.72; word-break: keep-all; line-height: 1.45; }
     .process-item.final .process-text { color: rgba(255,255,255,0.9); }
     .process-arrow { display: none; }
     @media (min-width: 768px) { .process-arrow { display: flex; align-items: center; color: var(--border); } }
@@ -293,38 +293,38 @@
       <div class="card">
         <div class="content-grid" style="gap: 16px; margin-bottom: 0;">
           <ul class="check-list" style="margin-bottom: 0;">
-            <li><strong style="color: var(--text-secondary);">국내 최고의 AI 전문가 Pool 보유</strong></li>
-            <li><strong style="color: var(--text-secondary);">비전공자도 쉽게 배우는 AI·데이터 교육</strong></li>
+            <li><strong style="opacity: 0.72;">국내 최고의 AI 전문가 Pool 보유</strong></li>
+            <li><strong style="opacity: 0.72;">비전공자도 쉽게 배우는 AI·데이터 교육</strong></li>
           </ul>
           <ul class="check-list" style="margin-bottom: 0;">
-            <li><strong style="color: var(--text-secondary);">노코드 기반 데이터 분석으로 문제 해결</strong></li>
-            <li><strong style="color: var(--text-secondary);">차별화된 B2B 맞춤형 AI 교육 솔루션 제공</strong></li>
+            <li><strong style="opacity: 0.72;">노코드 기반 데이터 분석으로 문제 해결</strong></li>
+            <li><strong style="opacity: 0.72;">차별화된 B2B 맞춤형 AI 교육 솔루션 제공</strong></li>
           </ul>
         </div>
         <div style="margin-top: 32px; padding: 24px; background: var(--surface-hover); border-radius: 12px; display: flex; flex-wrap: wrap; gap: 32px;">
           <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
             <div>
               <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">기업명</div>
-                <div style="color: var(--text-secondary); font-weight: 600;">에이블런(ABLEARN)</div>
+                <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">기업명</div>
+                <div style="opacity: 0.72; font-weight: 600;">에이블런(ABLEARN)</div>
               </div>
               <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">임직원 수</div>
-                <div style="color: var(--text-secondary); font-weight: 600;">약 30명</div>
+                <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">임직원 수</div>
+                <div style="opacity: 0.72; font-weight: 600;">약 30명</div>
               </div>
               <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">본사 위치</div>
-                <div style="color: var(--text-secondary); font-weight: 600;">서울 마포구 성암로 330, DMC첨단산업센터</div>
+                <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">본사 위치</div>
+                <div style="opacity: 0.72; font-weight: 600;">서울 마포구 성암로 330, DMC첨단산업센터</div>
               </div>
               <div style="display: flex; align-items: flex-start; gap: 16px;">
-                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">홈페이지</div>
-                <div style="color: var(--text-secondary);">
+                <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">홈페이지</div>
+                <div style="opacity: 0.72;">
                   <a href="https://ablearn.kr" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">https://ablearn.kr</a>
                 </div>
               </div>
             </div>
             <div style="margin-top: 16px;">
-              <a href="./ablearn-company-profile.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--text-secondary); padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); font-weight: 600; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
+              <a href="./ablearn-company-profile.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); opacity: 0.72; padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); font-weight: 600; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 에이블런 회사소개서 보기 / 다운로드
               </a>
@@ -332,7 +332,7 @@
           </div>
           <div style="flex: 1; min-width: 300px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 8.7;">
             <object data="./ablearn-company-profile.pdf#view=Fit&toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" style="display: block; border: none;">
-              <div style="padding: 24px; text-align: center; color: var(--text-secondary); line-height: 1.6;">
+              <div style="padding: 24px; text-align: center; opacity: 0.72; line-height: 1.6;">
                 <p>모바일 기기 등 브라우저 환경에 따라<br>PDF 미리보기가 지원되지 않을 수 있습니다.</p>
                 <a href="./ablearn-company-profile.pdf" target="_blank" style="color: var(--accent); text-decoration: underline;">좌측 하단 버튼을 눌러보세요.</a>
               </div>
@@ -492,13 +492,13 @@
             <div class="details-content">
               <ul class="check-list" style="margin-bottom: 0;">
                 <li style="margin-bottom: 16px;"><strong>유연 근무제</strong><br>
-                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">시차 출퇴근, 재택근무(사무실 주 3회 출근) 가능</span>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">시차 출퇴근, 재택근무(사무실 주 3회 출근) 가능</span>
                 </li>
                 <li style="margin-bottom: 16px;"><strong>근무시간</strong><br>
-                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">주 5일 / 오전 10시 ~ 오후 7시 (1일 8시간, 주 5일 근무)</span>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">주 5일 / 오전 10시 ~ 오후 7시 (1일 8시간, 주 5일 근무)</span>
                 </li>
                 <li style="margin-bottom: 0;"><strong>근무지</strong><br>
-                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">서울 마포구 성암로 330, DMC첨단산업센터 B동 315호</span>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">서울 마포구 성암로 330, DMC첨단산업센터 B동 315호</span>
                 </li>
               </ul>
             </div>
@@ -512,11 +512,11 @@
               <ul class="check-list" style="margin-bottom: 24px;">
                 <li>
                   <strong>자유 양식의 국문 이력서 제출 필수</strong><br>
-                  <span style="font-size: 0.95rem; color: var(--text-secondary);">(단, 잡포탈 기본 이력서 양식 제외)</span>
+                  <span style="font-size: 0.95rem; opacity: 0.72;">(단, 잡포탈 기본 이력서 양식 제외)</span>
                 </li>
                 <li style="margin-bottom: 0;">
                   <strong>포트폴리오(기획서, 제안서 등) 필수 첨부</strong><br>
-                  <span style="display: block; margin-top: 8px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;">
+                  <span style="display: block; margin-top: 8px; font-size: 0.95rem; opacity: 0.72; line-height: 1.7;">
                     공유 가능한 기획서·제안서 등 레퍼런스를 첨부해 주세요.<br>
                     제출이 불가한 경우, 인터뷰 현장에서 직접 보여주시는 방식도 무방합니다.<br>
                     단, 해당 경우 <strong style="color: var(--text);">"인터뷰 현장에서 직접 보여주겠다"</strong>는 내용을 메일에 명시해 주세요.
@@ -569,7 +569,7 @@
             <div class="process-title">최종 합격</div>
           </div>
         </div>
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.95rem; color: var(--text-secondary); text-align: center;">
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.95rem; opacity: 0.72; text-align: center;">
           ※ 선발 절차 중 일부는 포지션 및 고용 형태에 따라 생략될 수 있습니다.
         </div>
       </div>
