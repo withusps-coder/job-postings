@@ -246,6 +246,60 @@
     .info-label { font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
     .info-value { font-weight: 600; color: var(--text); font-size: 1.1rem; }
 
+    /* ===== NEWS SECTION ===== */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .news-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .news-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+    }
+    .news-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .news-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      word-break: keep-all;
+    }
+    .news-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    @media (max-width: 768px) {
+      .news-grid { grid-template-columns: 1fr; }
+    }
     /* MANDATORY RULES FOR MOBILE */
     @media (max-width: 768px) {
       .hero { padding: 80px 16px 40px; }
@@ -407,6 +461,34 @@
              </object>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- NEWS & PRESS -->
+    <section class="reveal" aria-label="회사 뉴스 및 성과">
+      <h3 class="list-header" style="color: var(--accent); margin-bottom: 24px;">에이블런 소식 & 성과</h3>
+      <div class="news-grid">
+        <a href="https://www.epnc.co.kr/news/articleView.html?idxno=303107" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">2025 수상</span>
+            <p class="news-text">포브스코리아 선정 소비자 최고의 브랜드 대상 'AI·DX 교육' 부문 수상</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+        <a href="https://www.gokorea.kr/news/articleView.html?idxno=751512" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">성장 지표</span>
+            <p class="news-text">기업 AI 교육 문의 전년 대비 463% 급증, 최근 3년 평균 18배 성장 기록</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+        <a href="https://www.thebigdata.co.kr/view.php?ud=202410301045233158992ce13_23" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">파트너십</span>
+            <p class="news-text">구글 워크스페이스(Google Workspace) 공식 교육 파트너 선정</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
       </div>
     </section>
 
