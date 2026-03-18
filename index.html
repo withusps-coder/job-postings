@@ -459,7 +459,7 @@
      RENDER JOBS
      ================================================================ */
   function renderJobs() {
-    const filtered = JOBS.filter(j => {
+    const filtered = JOBS.slice().reverse().filter(j => {
       return activeCategory === "전체" || j.category === activeCategory;
     });
 
