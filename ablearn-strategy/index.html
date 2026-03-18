@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[에이블런] 사업 전략 기획 채용</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; }
+
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.04);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.01em; font-feature-settings: 'cv11', 'ss01';
+      transition: background 0.3s, color 0.3s;
+      scrollbar-gutter: stable;
+    }
+    h1,h2,h3,h4,h5,h6 { color: var(--text); letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; }
+    h1 { font-weight: 700; font-size: 3rem; }
+    h2 { font-weight: 700; font-size: 2rem; }
+    h3 { font-weight: 600; font-size: 1.5rem; }
+    body, p, li, td, th, span, label { font-weight: 400; font-size: 1rem; }
+    p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      height: 100%;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .reveal, .hero-bg, .theme-toggle { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; margin-bottom: 24px; padding: 24px; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .hero { padding: 40px 0 !important; background: none !important; border-bottom: 2px solid black; }
+      .hero * { color: black !important; text-shadow: none !important; }
+    }
+    @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
+
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    details { overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; }
+    details summary { cursor: pointer; list-style: none; padding: 16px 20px; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after { content: '+'; font-size: 1.5rem; line-height: 1; font-weight: 300; transition: transform 0.3s; color: var(--accent); }
+    details[open] summary::after { transform: rotate(45deg); }
+    .details-content { padding: 0 20px 20px; color: var(--text); line-height: 1.8; border-top: 1px solid transparent; }
+    details[open] .details-content { border-top-color: var(--border); padding-top: 16px; }
+
+    .hero {
+      padding: 120px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    html.theme-dark .hero { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0a0a0a 100%); }
+    html.theme-light .hero { background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #ffffff 100%); }
+
+    .hero h1 { font-size: clamp(1.75rem, 4.5vw, 3rem); margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.25; }
+    .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 1200px; margin: 0 auto 32px; word-break: keep-all; }
+
+    .badge-wrap { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 10px 24px; border-radius: 999px;
+      background: var(--surface); color: var(--text); border: 1px solid var(--border);
+      font-weight: 700; font-size: 1.05rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .badge.accent { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+    section { margin-bottom: 96px; }
+
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 40px; margin-bottom: 64px;
+    }
+    .stat-card { text-align: center; padding: 40px 24px; display: flex; flex-direction: column; justify-content: center; }
+    .stat-value {
+      font-size: 4rem; font-weight: 800; color: var(--accent); line-height: 1;
+      margin-bottom: 12px; font-family: 'Inter', sans-serif;
+      display: flex; justify-content: center; align-items: baseline; gap: 4px;
+    }
+    .stat-value span[data-count] { font-size: inherit; font-weight: inherit; }
+    .stat-suffix { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .stat-label { font-size: 1.1rem; color: var(--text-secondary); font-weight: 600; }
+
+    .content-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    @media (min-width: 768px) { .work-process-grid { grid-template-columns: 1.35fr 1fr; } }
+
+    .section-title {
+      font-size: 2rem; margin-bottom: 32px; border-bottom: 2px solid var(--border);
+      padding-bottom: 16px; display: inline-flex; align-items: center; gap: 12px;
+    }
+    .section-title svg { stroke: var(--accent); width: 32px; height: 32px; }
+
+    .list-header { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: var(--text); margin-top: 8px; }
+
+    ul.check-list { list-style: none; margin-bottom: 24px; }
+    ul.check-list li { position: relative; padding-left: 32px; margin-bottom: 16px; color: var(--text); font-size: 1.05rem; line-height: 1.6; word-break: keep-all; }
+    ul.check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--positive); font-weight: 700; font-size: 1.2rem; }
+    ul.bullet-list { padding-left: 20px; color: var(--text); margin-bottom: 24px; }
+    ul.bullet-list li { margin-bottom: 12px; font-size: 1.05rem; letter-spacing: -0.05em; word-break: keep-all; }
+
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .benefit-item { display: flex; flex-direction: column; gap: 12px; }
+    .benefit-icon { font-size: 2rem; background: var(--surface-hover); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 8px; }
+    .benefit-title { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+    .benefit-desc { color: var(--text); font-size: 0.95rem; word-break: keep-all; }
+
+    .contact-card {
+      background: var(--surface); border: 2px solid var(--border);
+      border-radius: 16px; padding: 48px; text-align: center;
+      max-width: 800px; margin: 0 auto;
+    }
+    .contact-card h2 { font-size: 2rem; margin-bottom: 16px; }
+    .contact-card p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px; }
+    .contact-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--accent); color: white; border: none;
+      padding: 18px 48px; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: background 0.2s;
+    }
+    .contact-btn:hover { background: var(--accent-secondary); }
+    .contact-info { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .info-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .info-label { font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+    .info-value { font-weight: 600; color: var(--text); font-size: 1.1rem; }
+
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+    .news-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 20px;
+      border-radius: 16px; text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+    }
+    .news-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
+    .news-tag { display: inline-block; padding: 4px 10px; background: rgba(59, 130, 246, 0.1); color: var(--accent); font-size: 0.75rem; font-weight: 700; border-radius: 6px; margin-bottom: 12px; width: fit-content; }
+    .news-text { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 16px; word-break: keep-all; }
+    .news-link { font-size: 0.85rem; font-weight: 600; color: var(--accent-secondary); display: flex; align-items: center; gap: 4px; }
+    @media (max-width: 768px) { .news-grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 768px) {
+      .hero { padding: 80px 16px 40px; }
+      .hero h1 { font-size: 1.75rem; margin-bottom: 16px; }
+      .contact-card { padding: 32px 16px; }
+      .contact-info { flex-direction: column; gap: 24px; }
+    }
+    @media (max-width: 375px) {
+      body { overflow-x: hidden; }
+      .container { padding: 0 16px 60px; }
+      .card { padding: 20px; }
+      .stat-value { font-size: 2.5rem; }
+      h1 { font-size: 1.5rem !important; }
+      h2 { font-size: 1.5rem !important; }
+      .section-title { font-size: 1.5rem; }
+    }
+
+    .process-container { display: flex; flex-direction: column; gap: 16px; padding: 16px 0 0; }
+    @media (min-width: 768px) { .process-container { flex-direction: row; align-items: stretch; justify-content: space-between; gap: 12px; } }
+    .process-item { flex: 1; background: var(--surface-hover); border-radius: 12px; padding: 24px 16px; text-align: center; position: relative; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+    .process-item.active { background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.3); }
+    .process-item.final { background: var(--accent); border-color: var(--accent); box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2); }
+    .process-number { width: 32px; height: 32px; border-radius: 50%; background: var(--surface); color: var(--accent); border: 2px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px; font-size: 0.9rem; }
+    .process-item.active .process-number { background: var(--accent); border-color: var(--accent); color: white; }
+    .process-item.final .process-number { background: white; border-color: white; color: var(--accent); }
+    .process-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 12px; word-break: keep-all; }
+    .process-item.final .process-title { color: white; }
+    .process-text { font-size: 0.9rem; color: var(--text-secondary); word-break: keep-all; line-height: 1.45; }
+    .process-item.final .process-text { color: rgba(255,255,255,0.9); }
+    .process-arrow { display: none; }
+    @media (min-width: 768px) { .process-arrow { display: flex; align-items: center; color: var(--border); } }
+  </style>
+</head>
+<body>
+  <main id="main-content" role="main">
+  <!-- STEPUP LOGO (TOP LEFT) -->
+  <a href="https://withusps-coder.github.io/job-postings/" style="position: absolute; top: 16px; left: 16px; z-index: 50;">
+    <img src="../stepup-logo.png" alt="StepUp Partners" style="height: 40px; width: auto; mix-blend-mode: multiply;">
+  </a>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">🌙</span><span id="themeLabel">Dark</span></button>
+      <button onclick="downloadImage()"><span>📥</span><span>Download PNG</span></button>
+      <button onclick="window.print()"><span>🖨️</span><span>Print / PDF</span></button>
+    </div>
+  </div>
+
+  <header class="hero animate">
+    <div class="badge-wrap">
+      <span class="badge accent">채용 중</span>
+      <span class="badge">스텝업파트너스 추천 리드</span>
+    </div>
+    <h1 class="animate delay-1">[에이블런] 사업 전략 기획</h1>
+    <p class="animate delay-2">AI 리터러시 교육 전문기업 에이블런과 함께 신규 사업을 발굴하고 성장을 주도할 사업 전략 기획자를 모십니다.</p>
+  </header>
+
+  <div class="container">
+    <!-- COMPANY STATS -->
+    <section class="stats-grid animate delay-3" aria-label="회사 주요 성과">
+      <div class="card stat-card">
+        <div class="stat-value"><span data-count="3">0</span><span class="stat-suffix">개월</span></div>
+        <div class="stat-label">설립 초단기 BEP 돌파</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-value"><span data-count="6">0</span><span class="stat-suffix">개월</span></div>
+        <div class="stat-label">시드 투자 유치 성과</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-value"><span data-count="100">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-label">연 평균 매출 성장률(이상)</div>
+      </div>
+    </section>
+
+    <!-- ABOUT COMPANY -->
+    <section class="reveal" aria-label="회사 소개">
+      <h2 class="section-title">
+        <img src="./logo-ablearn.png" alt="에이블런 로고" style="height: 32px; width: auto; object-fit: contain; margin-top: -4px;">
+        에이블런(ABLEARN) 소개
+      </h2>
+      <div class="card">
+        <div class="content-grid" style="gap: 16px; margin-bottom: 0;">
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li>국내 최고의 AI 전문가 Pool 보유</li>
+            <li>비전공자도 쉽게 배우는 AI·데이터 교육</li>
+          </ul>
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li>노코드 기반 데이터 분석으로 문제 해결</li>
+            <li>차별화된 B2B 맞춤형 AI 교육 솔루션 제공</li>
+          </ul>
+        </div>
+        <div style="margin-top: 32px; padding: 24px; background: var(--surface-hover); border-radius: 12px; display: flex; flex-wrap: wrap; gap: 32px;">
+          <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
+            <div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">기업명</div>
+                <div style="color: var(--text-secondary); font-weight: 600;">에이블런(ABLEARN)</div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">임직원 수</div>
+                <div style="color: var(--text-secondary); font-weight: 600;">약 30명</div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">본사 위치</div>
+                <div style="color: var(--text-secondary); font-weight: 600;">서울 마포구 성암로 330, DMC첨단산업센터</div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px;">
+                <div style="min-width: 75px; font-weight: 600; color: var(--text-secondary);">홈페이지</div>
+                <div style="color: var(--text-secondary);">
+                  <a href="https://ablearn.kr" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">https://ablearn.kr</a>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 16px;">
+              <a href="./ablearn-company-profile.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: var(--surface); color: var(--text-secondary); padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); font-weight: 600; text-decoration: none; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)';">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                에이블런 회사소개서 보기 / 다운로드
+              </a>
+            </div>
+          </div>
+          <div style="flex: 1; min-width: 300px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 8.7;">
+            <object data="./ablearn-company-profile.pdf#view=Fit&toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%" style="display: block; border: none;">
+              <div style="padding: 24px; text-align: center; color: var(--text-secondary); line-height: 1.6;">
+                <p>모바일 기기 등 브라우저 환경에 따라<br>PDF 미리보기가 지원되지 않을 수 있습니다.</p>
+                <a href="./ablearn-company-profile.pdf" target="_blank" style="color: var(--accent); text-decoration: underline;">좌측 하단 버튼을 눌러보세요.</a>
+              </div>
+            </object>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS & PRESS -->
+    <section class="reveal" aria-label="회사 뉴스 및 성과">
+      <div class="news-grid" style="margin-top: -80px;">
+        <a href="https://www.epnc.co.kr/news/articleView.html?idxno=327457" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">2026 최신</span>
+            <p class="news-text">교육을 넘어 'AX(AI 전환) 파트너' 선언,<br>AI 중심 업무 재설계 본격화</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+        <a href="https://jmagazine.joins.com/forbes/view/340865" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">2025 수상</span>
+            <p class="news-text">포브스코리아 선정 '2025 소비자 선정 최고의 브랜드 대상' AI·DX 교육 부문 수상</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+        <a href="https://www.hansbiz.co.kr/news/articleView.html?idxno=823096" target="_blank" class="news-card">
+          <div>
+            <span class="news-tag">성장 지표</span>
+            <p class="news-text">기업 AI 교육 문의 전년 대비 463% 급증,<br>최근 3년 연평균 대비 18배 성장</p>
+          </div>
+          <span class="news-link">기사 보기 →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ROLE DETAILS -->
+    <section class="reveal" aria-label="포지션 및 업무 내용">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        포지션 & 업무 안내
+      </h2>
+      <div class="content-grid">
+        <div class="card">
+          <h3 class="list-header" style="color: var(--accent);">포지션 개요</h3>
+          <p style="margin-bottom: 24px; color: var(--text); word-break: keep-all; line-height: 1.7;">정부 및 기업 대상 사업 제안과 신규 기회를 발굴하며,<br><strong>에이블런의 사업 영역 확장을 전략적으로 주도</strong>합니다.</p>
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li><strong>포트폴리오(기획서·제안서 등) 제출 필수</strong>입니다.</li>
+            <li style="margin-bottom: 0;">경력 5년 이상 / IT 교육 분야 경력 또는 석박사 학위 동등 조건 인정</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="list-header" style="color: var(--accent);">주요 업무</h3>
+          <ul class="check-list">
+            <li>정부 및 기업 대상 사업 제안서 작성 및 관리</li>
+            <li>현황 분석 및 신규 사업 기회 구체화 (리서치, 분석, 기획)</li>
+            <li>신규 사업 기회 발굴을 위한 대내외 협력 관계 구축</li>
+            <li>기존 사업 영역 발굴 및 확장</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section class="reveal" aria-label="자격 요건 및 우대 사항">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        지원 요건
+      </h2>
+      <div class="content-grid">
+        <div class="card">
+          <h3 class="list-header">자격 요건 & 필요 역량</h3>
+          <ul class="bullet-list">
+            <li>전공 무관 / 관련 분야 경력 5년 이상 필수</li>
+            <li>인정 경력: 입찰/제안서 작성, 기획/전략/컨설팅, 사업개발 PM/PL</li>
+            <li>IT 교육 분야 경력 또는 석박사 학위 동등 조건 인정</li>
+            <li><strong>포트폴리오(기획서, 제안서 등) 제출 필수</strong></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="list-header">우대 사항 (PLUS)</h3>
+          <ul class="bullet-list">
+            <li>스타트업에서 프로젝트를 주도적으로 리드한 경험</li>
+            <li>클라우드/IT 생산성 도구 활용 능숙자</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="reveal" aria-label="복지 및 혜택">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+        복지 및 혜택
+      </h2>
+      <div class="card">
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">🏖️</div>
+            <div class="benefit-title">장기 근속 포상</div>
+            <div class="benefit-desc">3년 근무 시 1개월 유급휴가<br>+ 휴가비 200만원 지원</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">☕</div>
+            <div class="benefit-title">음료 및 간식 지원</div>
+            <div class="benefit-desc">상시 음료 및 간식 무제한 지원</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🍽️</div>
+            <div class="benefit-title">야근 식대 지원</div>
+            <div class="benefit-desc">야근 시 저녁 식대 지원<br>외근/야근 택시비 지원</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">💻</div>
+            <div class="benefit-title">업무 장비 지원</div>
+            <div class="benefit-desc">최신 업무 장비 제공 및 정기 교체</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🛋️</div>
+            <div class="benefit-title">휴식 공간</div>
+            <div class="benefit-desc">안마의자, 수면실 등<br>쾌적한 휴식 환경 제공</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKING & PROCESS -->
+    <section class="reveal" aria-label="근무 조건 및 채용 절차">
+      <div class="content-grid work-process-grid">
+        <div>
+          <h2 class="section-title" style="font-size:1.6rem;">근무 조건</h2>
+          <details open>
+            <summary>고용 형태 및 급여</summary>
+            <div class="details-content">
+              <ul class="check-list" style="margin-bottom: 0;">
+                <li>정규직 (풀타임)</li>
+                <li style="margin-bottom: 0;">급여 조건 : 경력에 따른 협의</li>
+              </ul>
+            </div>
+          </details>
+          <details open>
+            <summary>근무 시간 및 장소</summary>
+            <div class="details-content">
+              <ul class="check-list" style="margin-bottom: 0;">
+                <li style="margin-bottom: 16px;"><strong>유연 근무제</strong><br>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">오전 9시~11시 사이 자유로운 출근</span>
+                </li>
+                <li style="margin-bottom: 0;"><strong>근무지</strong><br>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; color: var(--text-secondary);">서울 마포구 성암로 330, DMC첨단산업센터 B동 315호</span>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div>
+          <h2 class="section-title" style="font-size:1.6rem;">지원 안내</h2>
+          <details open>
+            <summary>제출 서류 및 유의사항</summary>
+            <div class="details-content">
+              <ul class="check-list" style="margin-bottom: 24px;">
+                <li><strong>자유 양식의 국문 이력서 제출 필수</strong><br>
+                  <span style="font-size: 0.95rem; color: var(--text-secondary);">(단, 잡포탈 기본 이력서 양식 제외)</span>
+                </li>
+                <li style="margin-bottom: 0;"><strong>포트폴리오(기획서, 제안서 등) 필수 첨부</strong></li>
+              </ul>
+              <div style="background: var(--surface-hover); padding: 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.6;">
+                <div style="white-space: nowrap;">※ 입사지원 서류에 허위사실이 발견될 경우,</div>
+                <div style="white-space: nowrap; padding-left: 20px;">채용 확정 이후라도 채용이 취소될 수 있습니다.</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS TIMELINE -->
+    <section class="reveal" aria-label="전형 절차">
+      <h2 class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        전형 절차
+      </h2>
+      <div class="card" style="padding: 24px 32px 32px;">
+        <div class="process-container">
+          <div class="process-item">
+            <div class="process-number">1</div>
+            <div class="process-title">서류 전형</div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item active">
+            <div class="process-number">2</div>
+            <div class="process-title">사전 서면인터뷰</div>
+            <div class="process-text">보다 상세한 경력과 스토리를 듣기 위한 단계입니다.<br><span style="font-size: 0.8rem; margin-top: 4px; display: inline-block;">※ 약 30~60분 소요</span></div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item">
+            <div class="process-number">3</div>
+            <div class="process-title">대면 인터뷰</div>
+            <div class="process-text">직무핏, 컬처핏 등을 서로 심도있게 맞추어봅니다.</div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item">
+            <div class="process-number">4</div>
+            <div class="process-title">커피챗 / 식사미팅</div>
+            <div class="process-text"><span style="font-size: 0.85rem;">※ 경력직에 한함</span></div>
+          </div>
+          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
+          <div class="process-item final">
+            <div class="process-number">5</div>
+            <div class="process-title">최종 합격</div>
+          </div>
+        </div>
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.95rem; color: var(--text-secondary); text-align: center;">
+          ※ 선발 절차 중 일부는 포지션 및 고용 형태에 따라 생략될 수 있습니다.
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="reveal">
+      <div class="contact-card">
+        <img src="./logo-stepup.png" alt="스텝업파트너스 로고" style="height: 40px; width: auto; object-fit: contain; margin-bottom: 24px; mix-blend-mode: multiply; filter: brightness(1.05) contrast(1.1);">
+        <h2>커리어에 진심인 채용 전문가가 동행합니다.</h2>
+        <p>지원 결정부터 전형 끝까지, 결과와 피드백을 투명하게 공유드리겠습니다.</p>
+        <a href="mailto:kms@step-up.kr" class="contact-btn" style="padding: 14px 28px; font-size: 1.05rem;">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          지원하기
+        </a>
+        <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border);">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 24px;">
+            스텝업파트너스 헤드헌터 금문섭 파트너
+          </div>
+          <div class="contact-info" style="margin-top: 0; padding-top: 0; border-top: none;">
+            <div class="info-item">
+              <span class="info-label" aria-label="연락처" style="display: flex; align-items: center; justify-content: center; height: 28px;">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              </span>
+              <span class="info-value">010-2793-3899</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label" aria-label="이메일" style="display: flex; align-items: center; justify-content: center; height: 28px;">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </span>
+              <span class="info-value">kms@step-up.kr</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label" aria-label="링크드인" style="display: flex; align-items: center; justify-content: center; height: 28px;">
+                <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </span>
+              <a href="https://www.linkedin.com/in/majesty89/" class="info-value" style="color:var(--accent); text-decoration: none;" target="_blank">LinkedIn Profile →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      var dropdown = document.getElementById('vizMenuDropdown');
+      if (dropdown) dropdown.classList.toggle('open');
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    var savedTheme = localStorage.getItem('viz-theme');
+    var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? 'Dark' : 'Light';
+      localStorage.setItem('viz-theme', t);
+      currentTheme = t;
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count);
+        var start = performance.now(), duration = 1500;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 4);
+          el.textContent = Math.floor(target * eased).toLocaleString();
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = target.toLocaleString();
+        })(start);
+      });
+    }
+    var counterEls = document.querySelectorAll('[data-count]');
+    if (counterEls.length > 0) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.2 });
+      counterEls.forEach(el => cObs.observe(el));
+    }
+
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2 });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+  </script>
+</body>
+</html>
