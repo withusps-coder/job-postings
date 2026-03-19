@@ -144,8 +144,8 @@
     .job-card:hover { background: var(--surface-hover); }
 
     .job-logo {
-      display: block; height: 20px; width: auto; object-fit: contain;
-      margin-bottom: 8px;
+      height: 16px; width: auto; object-fit: contain; flex-shrink: 0;
+      vertical-align: middle;
     }
     html.theme-light .job-logo { mix-blend-mode: multiply; }
     html.theme-dark .job-logo { filter: brightness(0) invert(1); opacity: 0.75; }
@@ -515,11 +515,11 @@
       const metaHtml = j.meta.map((m, idx) =>
         `<span class="job-meta-item">${m}</span>${idx < j.meta.length - 1 ? '<span class="job-meta-sep"></span>' : ''}`
       ).join("");
-      const logoHtml = j.logo ? `<img class="job-logo" src="${j.logo}" alt="">` : '';
+      const logoHtml = j.logo ? `<img class="job-logo" src="${j.logo}" alt=""><span class="job-meta-sep"></span>` : '';
       return `
         <a class="job-card" href="${j.url}">
-          ${logoHtml}<div class="job-title">${j.title}</div>
-          <div class="job-meta">${metaHtml}</div>
+          <div class="job-title">${j.title}</div>
+          <div class="job-meta">${logoHtml}${metaHtml}</div>
         </a>
       `;
     }).join("");
