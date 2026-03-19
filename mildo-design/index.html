@@ -165,6 +165,7 @@
       .hero h1 { font-size: 1.75rem; margin-bottom: 16px; }
       .contact-card { padding: 32px 16px; }
       .contact-info { flex-direction: column; gap: 24px; }
+      .ceo-promise-grid { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 375px) {
       body { overflow-x: hidden; }
@@ -394,33 +395,68 @@
 
     <!-- CEO PROMISE -->
     <section class="reveal" aria-label="밀도 대표의 약속">
-      <div style="border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 12px 12px 0; padding: 32px 36px;">
-        <div style="font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
-          💬 밀도 대표의 약속
+      <div style="
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0a1628 100%);
+        border-radius: 20px;
+        padding: 56px 48px;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- decorative quote mark -->
+        <div style="position: absolute; top: -10px; left: 32px; font-size: 14rem; line-height: 1; color: rgba(59,130,246,0.12); font-family: Georgia, serif; font-weight: 900; pointer-events: none; user-select: none;">"</div>
+        <!-- decorative circles -->
+        <div style="position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+        <div style="position: absolute; bottom: -40px; left: 40%; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%); pointer-events: none;"></div>
+
+        <!-- title -->
+        <div style="position: relative; margin-bottom: 40px;">
+          <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.35); border-radius: 999px; padding: 8px 20px; margin-bottom: 20px;">
+            <span style="font-size: 1rem;">💬</span>
+            <span style="font-size: 0.9rem; font-weight: 700; color: #93c5fd; letter-spacing: 0.05em; font-family: 'Noto Sans KR', sans-serif;">밀도 대표의 약속</span>
+          </div>
+          <div style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #ffffff; line-height: 1.2; font-family: 'Noto Sans KR', sans-serif; letter-spacing: -0.04em; word-break: keep-all;">
+            함께 일하는 모든 분께<br>진심을 다하겠습니다.
+          </div>
         </div>
-        <ol style="list-style: none; display: flex; flex-direction: column; gap: 14px; padding: 0; margin: 0;">
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">1️⃣</span>성과에 따른 확실한 보상을 하겠습니다.
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">2️⃣</span>주도적으로 일하는 환경을 만들겠습니다.
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">3️⃣</span>새롭고 창의적인 시도를 적극 지원하겠습니다.
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">4️⃣</span>빠른 의사결정으로 여러분의 시간을 낭비하지 않겠습니다.
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">5️⃣</span>회사 생활이 즐거울 수 있도록 노력하겠습니다.
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">6️⃣</span>사회에 도움이 되는 회사가 되겠습니다.
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text); line-height: 1.6;">
-            <span style="font-size: 1.1rem; flex-shrink: 0;">7️⃣</span>대표가 먼저 솔선수범하겠습니다.
-          </li>
-        </ol>
+
+        <!-- promises grid -->
+        <div class="ceo-promise-grid" style="position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(4px);">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.25); border: 1px solid rgba(59,130,246,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #93c5fd; font-family: 'Inter', sans-serif;">01</div>
+            <span style="font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">성과에 따른 확실한 보상을 하겠습니다.</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(4px);">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.25); border: 1px solid rgba(59,130,246,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #93c5fd; font-family: 'Inter', sans-serif;">02</div>
+            <span style="font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">주도적으로 일하는 환경을 만들겠습니다.</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(4px);">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.25); border: 1px solid rgba(59,130,246,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #93c5fd; font-family: 'Inter', sans-serif;">03</div>
+            <span style="font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">새롭고 창의적인 시도를 적극 지원하겠습니다.</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(4px);">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.25); border: 1px solid rgba(59,130,246,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #93c5fd; font-family: 'Inter', sans-serif;">04</div>
+            <span style="font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">빠른 의사결정으로 여러분의 시간을 낭비하지 않겠습니다.</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(4px);">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.25); border: 1px solid rgba(59,130,246,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #93c5fd; font-family: 'Inter', sans-serif;">05</div>
+            <span style="font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">회사 생활이 즐거울 수 있도록 노력하겠습니다.</span>
+          </div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(4px);">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.25); border: 1px solid rgba(59,130,246,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #93c5fd; font-family: 'Inter', sans-serif;">06</div>
+            <span style="font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">사회에 도움이 되는 회사가 되겠습니다.</span>
+          </div>
+          <!-- 07 full width -->
+          <div style="grid-column: 1 / -1; background: linear-gradient(90deg, rgba(59,130,246,0.2) 0%, rgba(139,92,246,0.15) 100%); border: 1px solid rgba(59,130,246,0.4); border-radius: 12px; padding: 20px 22px; display: flex; align-items: center; gap: 14px;">
+            <div style="min-width: 32px; height: 32px; border-radius: 8px; background: rgba(59,130,246,0.4); border: 1px solid rgba(59,130,246,0.6); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; color: #bfdbfe; font-family: 'Inter', sans-serif;">07</div>
+            <span style="font-size: 1.05rem; font-weight: 700; color: #ffffff; line-height: 1.5; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all;">대표가 먼저 솔선수범하겠습니다.</span>
+          </div>
+        </div>
+
+        <!-- signature line -->
+        <div style="position: relative; margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+          <img src="./logo-mildo.png" alt="밀도" style="height: 28px; width: auto; object-fit: contain; opacity: 0.8; filter: brightness(10);">
+          <span style="font-size: 0.95rem; color: rgba(255,255,255,0.5); font-family: 'Noto Sans KR', sans-serif;">밀도 대표</span>
+        </div>
       </div>
     </section>
 
