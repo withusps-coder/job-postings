@@ -143,17 +143,16 @@
     .job-card:first-child { border-top: 1px solid var(--border); }
     .job-card:hover { background: var(--surface-hover); }
 
-    .job-title-wrap {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
-    }
     .job-logo {
-      height: 22px; width: auto; object-fit: contain; flex-shrink: 0;
+      display: block; height: 20px; width: auto; object-fit: contain;
+      margin-bottom: 8px;
     }
     html.theme-light .job-logo { mix-blend-mode: multiply; }
     html.theme-dark .job-logo { filter: brightness(0) invert(1); opacity: 0.75; }
     .job-title {
       font-size: 1.55rem; font-weight: 700; color: var(--text);
       letter-spacing: -0.03em; line-height: 1.3; word-break: keep-all;
+      margin-bottom: 10px;
     }
 
     .job-meta {
@@ -519,7 +518,7 @@
       const logoHtml = j.logo ? `<img class="job-logo" src="${j.logo}" alt="">` : '';
       return `
         <a class="job-card" href="${j.url}">
-          <div class="job-title-wrap">${logoHtml}<span class="job-title">${j.title}</span></div>
+          ${logoHtml}<div class="job-title">${j.title}</div>
           <div class="job-meta">${metaHtml}</div>
         </a>
       `;
