@@ -202,6 +202,26 @@
     .stat-suffix { font-size: 1.5rem; font-weight: 700; color: var(--text); }
     .stat-label { font-size: 1.1rem; opacity: 0.72; font-weight: 600; }
 
+    /* ===== NEWS ===== */
+    .news-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px;
+    }
+    .news-card {
+      background: var(--surface); border: 1px solid var(--border); padding: 20px;
+      border-radius: 16px; text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+    }
+    .news-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
+    .news-tag {
+      display: inline-block; padding: 4px 10px; background: rgba(59,130,246,0.1);
+      color: var(--accent); font-size: 0.75rem; font-weight: 700; border-radius: 6px;
+      margin-bottom: 12px; width: fit-content;
+    }
+    .news-text { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 16px; word-break: keep-all; }
+    .news-link { font-size: 0.85rem; font-weight: 600; color: var(--accent-secondary); display: flex; align-items: center; gap: 4px; }
+    @media (max-width: 768px) { .news-grid { grid-template-columns: 1fr; } }
+
     .benefits-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
     }
@@ -317,19 +337,19 @@
     <section class="stats-grid animate delay-3" aria-label="회사 주요 성과">
       <div class="card stat-card">
         <div class="stat-value"><span data-count="200">0</span><span class="stat-suffix">억+</span></div>
-        <div class="stat-label">설립 2년 만에 달성한 연매출</div>
+        <div class="stat-label">설립 2년 만에<br>달성한 연매출</div>
       </div>
       <div class="card stat-card">
         <div class="stat-value"><span data-count="14">0</span><span class="stat-suffix">만+</span></div>
-        <div class="stat-label">코어 릴렉스 매트리스 누적 고객 수</div>
+        <div class="stat-label">코어 릴렉스 매트리스<br>누적 고객 수</div>
       </div>
       <div class="card stat-card">
-        <div class="stat-value"><span data-count="95" data-suffix=".1%">0</span><span class="stat-suffix">%</span></div>
-        <div class="stat-label">허리 편안함 개선 고객 만족도</div>
+        <div class="stat-value"><span data-count="95.1" data-decimal="1">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-label">허리 편안함 개선<br>고객 만족도</div>
       </div>
       <div class="card stat-card">
-        <div class="stat-value"><span data-count="98" data-suffix=".5%">0</span><span class="stat-suffix">%</span></div>
-        <div class="stat-label">지인 추천 의향률</div>
+        <div class="stat-value"><span data-count="98.5" data-decimal="1">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-label">지인 추천<br>의향률</div>
       </div>
     </section>
 
@@ -652,12 +672,14 @@
         if (el.dataset.counted) return;
         el.dataset.counted = '1';
         var target = parseFloat(el.dataset.count);
+        var decimals = parseInt(el.dataset.decimal || '0');
         var start = performance.now(), duration = 1500;
         (function tick(now) {
           var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 4);
-          el.textContent = Math.floor(target * eased).toLocaleString();
+          var val = target * eased;
+          el.textContent = decimals > 0 ? val.toFixed(decimals) : Math.floor(val).toLocaleString();
           if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = target.toLocaleString();
+          else el.textContent = decimals > 0 ? target.toFixed(decimals) : target.toLocaleString();
         })(start);
       });
     }
