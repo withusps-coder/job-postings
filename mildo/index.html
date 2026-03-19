@@ -12,6 +12,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { interpolate-size: allow-keywords; }
 
+    /* ===== THEMES ===== */
     html.theme-dark {
       --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
       --border: rgba(255,255,255,0.04);
@@ -35,13 +36,20 @@
       transition: background 0.3s, color 0.3s;
       scrollbar-gutter: stable;
     }
-    h1,h2,h3,h4,h5,h6 { color: var(--text); letter-spacing: -0.03em; line-height: 1.1; text-wrap: balance; }
+    h1,h2,h3,h4,h5,h6 {
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-wrap: balance;
+    }
     h1 { font-weight: 700; font-size: 3rem; }
     h2 { font-weight: 700; font-size: 2rem; }
     h3 { font-weight: 600; font-size: 1.5rem; }
     body, p, li, td, th, span, label { font-weight: 400; font-size: 1rem; }
     p,li,td,th,span,label { color: var(--text); }
+    .text-secondary { opacity: 0.72; }
 
+    /* ===== CARD ===== */
     .card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 32px;
@@ -53,7 +61,11 @@
       transform: translateY(-2px);
     }
 
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .animate { animation: fadeInUp 0.6s ease-out both; }
     .animate.delay-1 { animation-delay: 0.1s; }
     .animate.delay-2 { animation-delay: 0.2s; }
@@ -67,6 +79,7 @@
       .reveal { opacity: 1; transform: none; }
     }
 
+    /* ===== PRINT ===== */
     @media print {
       body { background: white !important; color: black !important; }
       .viz-menu { display: none !important; }
@@ -78,6 +91,7 @@
     }
     @page { margin: 1in; @bottom-center { content: "Page " counter(page); font-size: 9pt; color: #666; } }
 
+    /* ===== MENU ===== */
     .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
     .viz-menu-toggle {
       width: 44px; height: 44px; border-radius: 12px;
@@ -103,6 +117,16 @@
     }
     .viz-menu-dropdown button:hover { background: var(--surface-hover); }
 
+    /* ===== SKIP TO CONTENT ===== */
+    .skip-to-content {
+      position: absolute; top: -40px; left: 6px; background: var(--accent);
+      color: white; padding: 8px 12px; text-decoration: none;
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: all 0.2s; z-index: 10000;
+    }
+    .skip-to-content:focus { top: 6px; opacity: 1; pointer-events: auto; }
+
+    /* ===== DETAILS ACCORDION ===== */
     details { overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; }
     details summary { cursor: pointer; list-style: none; padding: 16px 20px; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
     details summary::-webkit-details-marker { display: none; }
@@ -111,6 +135,7 @@
     .details-content { padding: 0 20px 20px; color: var(--text); line-height: 1.8; border-top: 1px solid transparent; }
     details[open] .details-content { border-top-color: var(--border); padding-top: 16px; }
 
+    /* ===== HERO ===== */
     .hero {
       padding: 120px 24px 80px;
       text-align: center;
@@ -118,8 +143,8 @@
       overflow: hidden;
       margin-bottom: 24px;
     }
-    html.theme-dark .hero { background: linear-gradient(135deg, #0f172a 0%, #1a2744 50%, #0a0a0a 100%); }
-    html.theme-light .hero { background: linear-gradient(135deg, #f8fafc 0%, #dbeafe 50%, #ffffff 100%); }
+    html.theme-dark .hero { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0a0a0a 100%); }
+    html.theme-light .hero { background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #ffffff 100%); }
 
     .hero h1 { font-size: clamp(1.75rem, 4.5vw, 3rem); margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.25; }
     .hero p { font-size: 1.25rem; opacity: 0.72; max-width: 1200px; margin: 0 auto 32px; word-break: keep-all; }
@@ -135,8 +160,13 @@
     .container { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
     section { margin-bottom: 96px; }
 
-    .content-grid { display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-    @media (min-width: 768px) { .work-process-grid { grid-template-columns: 1.35fr 1fr; } }
+    .content-grid {
+      display: grid; gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    @media (min-width: 768px) {
+      .work-process-grid { grid-template-columns: 1.35fr 1fr; }
+    }
 
     .section-title {
       font-size: 2rem; margin-bottom: 32px; border-bottom: 2px solid var(--border);
@@ -147,16 +177,14 @@
     .list-header { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; color: var(--text); margin-top: 8px; }
 
     ul.check-list { list-style: none; margin-bottom: 24px; }
-    ul.check-list li { position: relative; padding-left: 32px; margin-bottom: 16px; color: var(--text); font-size: 1.05rem; line-height: 1.6; word-break: keep-all; }
-    ul.check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--positive); font-weight: 700; font-size: 1.2rem; }
+    ul.check-list li {
+      position: relative; padding-left: 32px; margin-bottom: 16px; color: var(--text); font-size: 1.05rem; line-height: 1.6; word-break: keep-all;
+    }
+    ul.check-list li::before {
+      content: '✓'; position: absolute; left: 0; color: var(--positive); font-weight: 700; font-size: 1.2rem;
+    }
     ul.bullet-list { padding-left: 20px; color: var(--text); margin-bottom: 24px; }
     ul.bullet-list li { margin-bottom: 12px; font-size: 1.05rem; letter-spacing: -0.05em; word-break: keep-all; }
-
-    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .benefit-item { display: flex; flex-direction: column; gap: 12px; }
-    .benefit-icon { font-size: 2rem; background: var(--surface-hover); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 8px; }
-    .benefit-title { font-size: 1.25rem; font-weight: 700; color: var(--text); }
-    .benefit-desc { color: var(--text); font-size: 0.95rem; word-break: keep-all; line-height: 1.7; }
 
     .contact-card {
       background: var(--surface); border: 2px solid var(--border);
@@ -177,6 +205,40 @@
     .info-label { font-size: 0.875rem; opacity: 0.72; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
     .info-value { font-weight: 600; color: var(--text); font-size: 1.1rem; }
 
+    /* ===== PROCESS TIMELINE ===== */
+    .process-container {
+      display: flex; flex-direction: column; gap: 16px; padding: 16px 0 0;
+    }
+    @media (min-width: 768px) {
+      .process-container { flex-direction: row; align-items: stretch; justify-content: space-between; gap: 12px; }
+    }
+    .process-item {
+      flex: 1; background: var(--surface-hover); border-radius: 12px; padding: 24px 16px; text-align: center; position: relative;
+      border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    }
+    .process-item.active {
+      background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.3);
+    }
+    .process-item.final {
+      background: var(--accent); border-color: var(--accent); box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+    }
+    .process-number {
+      width: 32px; height: 32px; border-radius: 50%; background: var(--surface); color: var(--accent); border: 2px solid var(--border);
+      display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
+      margin-bottom: 12px; font-size: 0.9rem;
+    }
+    .process-item.active .process-number { background: var(--accent); border-color: var(--accent); color: white; }
+    .process-item.final .process-number { background: white; border-color: white; color: var(--accent); }
+    .process-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 12px; word-break: keep-all; }
+    .process-item.final .process-title { color: white; }
+    .process-text { font-size: 0.9rem; opacity: 0.72; word-break: keep-all; line-height: 1.45; }
+    .process-item.final .process-text { color: rgba(255,255,255,0.9); }
+    .process-arrow { display: none; }
+    @media (min-width: 768px) {
+      .process-arrow { display: flex; align-items: center; color: var(--border); }
+    }
+
+    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
       .hero { padding: 80px 16px 40px; }
       .hero h1 { font-size: 1.75rem; margin-bottom: 16px; }
@@ -191,24 +253,12 @@
       h2 { font-size: 1.5rem !important; }
       .section-title { font-size: 1.5rem; }
     }
-
-    .process-container { display: flex; flex-direction: column; gap: 16px; padding: 16px 0 0; }
-    @media (min-width: 768px) { .process-container { flex-direction: row; align-items: stretch; justify-content: space-between; gap: 12px; } }
-    .process-item { flex: 1; background: var(--surface-hover); border-radius: 12px; padding: 24px 16px; text-align: center; position: relative; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-    .process-item.active { background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.3); }
-    .process-item.final { background: var(--accent); border-color: var(--accent); box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2); }
-    .process-number { width: 32px; height: 32px; border-radius: 50%; background: var(--surface); color: var(--accent); border: 2px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px; font-size: 0.9rem; }
-    .process-item.active .process-number { background: var(--accent); border-color: var(--accent); color: white; }
-    .process-item.final .process-number { background: white; border-color: white; color: var(--accent); }
-    .process-title { font-weight: 700; font-size: 1.25rem; color: var(--text); margin-bottom: 12px; word-break: keep-all; }
-    .process-item.final .process-title { color: white; }
-    .process-text { font-size: 0.9rem; opacity: 0.72; word-break: keep-all; line-height: 1.45; }
-    .process-arrow { display: none; }
-    @media (min-width: 768px) { .process-arrow { display: flex; align-items: center; color: var(--border); } }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-to-content">본문 바로가기</a>
   <main id="main-content" role="main">
+
   <!-- STEPUP LOGO (TOP LEFT) -->
   <a href="https://withusps-coder.github.io/job-postings/" style="position: absolute; top: 16px; left: 16px; z-index: 50;">
     <img src="../stepup-logo.png" alt="StepUp Partners" style="height: 40px; width: auto; mix-blend-mode: multiply;">
@@ -240,46 +290,38 @@
   <div class="container">
 
     <!-- ABOUT COMPANY -->
-    <section class="reveal animate delay-3" aria-label="회사 소개" style="padding-top: 40px;">
+    <section class="reveal" aria-label="회사 소개">
       <h2 class="section-title">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-        밀도 소개
+        밀도(수면밀도) 소개
       </h2>
       <div class="card">
-        <div style="display: flex; flex-wrap: wrap; gap: 32px;">
-          <div style="flex: 1; min-width: 280px;">
-            <ul class="check-list" style="margin-bottom: 0;">
-              <li><strong style="opacity: 0.72;">2022년 8월 설립 — 빠르게 성장하는 매트리스 스타트업</strong></li>
-              <li><strong style="opacity: 0.72;">설립 2년 만에 연매출 200억 이상 달성</strong></li>
-              <li><strong style="opacity: 0.72;">허리 건강을 위한 매트리스 연구 개발 집중</strong></li>
-              <li><strong style="opacity: 0.72;">수면밀도 브랜드 운영</strong></li>
-            </ul>
-          </div>
-          <div style="flex: 1; min-width: 280px;">
-            <ul class="check-list" style="margin-bottom: 0;">
-              <li><strong style="opacity: 0.72;">임직원 약 30명 (소수 정예 조직)</strong></li>
-              <li><strong style="opacity: 0.72;">국내외 OEM 파트너십 기반 생산 구조</strong></li>
-              <li><strong style="opacity: 0.72;">2호선 뚝섬역 6번 출구 도보 1분</strong></li>
-              <li><strong style="opacity: 0.72;">영창디지털타워 10층 (서울 성동구)</strong></li>
-            </ul>
-          </div>
-        </div>
-        <div style="margin-top: 32px; padding: 24px; background: var(--surface-hover); border-radius: 12px; font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
-          <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-            <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">기업명</div>
-            <div style="opacity: 0.72; font-weight: 600;">밀도 (수면밀도)</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-            <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">설립</div>
-            <div style="opacity: 0.72; font-weight: 600;">2022년 8월</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
-            <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">임직원 수</div>
-            <div style="opacity: 0.72; font-weight: 600;">약 30명</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; gap: 16px;">
-            <div style="min-width: 75px; font-weight: 600; opacity: 0.72;">본사 위치</div>
-            <div style="opacity: 0.72; font-weight: 600;">서울 성동구 뚝섬로1길 63, 영창디지털타워 10층</div>
+        <div style="padding: 24px; background: var(--surface-hover); border-radius: 12px;">
+          <div style="font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+              <div style="min-width: 80px; font-weight: 600; opacity: 0.72;">기업명</div>
+              <div style="opacity: 0.72; font-weight: 600;">밀도 (수면밀도)</div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+              <div style="min-width: 80px; font-weight: 600; opacity: 0.72;">설립</div>
+              <div style="opacity: 0.72; font-weight: 600;">2022년 8월</div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+              <div style="min-width: 80px; font-weight: 600; opacity: 0.72;">임직원 수</div>
+              <div style="opacity: 0.72; font-weight: 600;">약 30명</div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+              <div style="min-width: 80px; font-weight: 600; opacity: 0.72;">연매출</div>
+              <div style="opacity: 0.72; font-weight: 600;">200억 이상 (설립 2년 만에)</div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
+              <div style="min-width: 80px; font-weight: 600; opacity: 0.72;">위치</div>
+              <div style="opacity: 0.72; font-weight: 600;">서울 성동구 뚝섬로1길 63, 영창디지털타워 10층</div>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 16px;">
+              <div style="min-width: 80px; font-weight: 600; opacity: 0.72;">교통</div>
+              <div style="opacity: 0.72; font-weight: 600;">뚝섬역 6번 출구 도보 1분</div>
+            </div>
           </div>
         </div>
       </div>
@@ -291,27 +333,14 @@
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
         포지션 & 업무 안내
       </h2>
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        <div class="card">
-          <h3 class="list-header" style="color: var(--accent);">포지션 개요</h3>
-          <p style="font-size: 1.05rem; letter-spacing: -0.05em; word-break: keep-all; line-height: 1.9; margin-bottom: 24px;">국내외 OEM 파트너 및 공급사와의 품질 커뮤니케이션을 주도하고, 데이터 기반으로 품질 이슈를 분석·개선하는 <strong>품질 관리 전담 담당자</strong>입니다.</p>
-          <h3 class="list-header" style="margin-top: 48px; font-size: 1.25rem; color: var(--accent);">이런 분을 찾습니다.</h3>
-          <ul class="bullet-list" style="margin-bottom: 0;">
-            <li>품질 문제를 데이터로 분석하고 구조적으로 해결하는 분</li>
-            <li>제조 파트너와 꼼꼼하게 소통하며 기준을 지켜가는 분</li>
-            <li>성장하는 스타트업에서 품질 체계를 직접 만들어가고 싶은 분</li>
-            <li>현장 외근과 협력사 협의가 자연스러운 분</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3 class="list-header" style="color: var(--accent);">주요 업무</h3>
-          <ul class="bullet-list" style="margin-bottom: 0;">
-            <li>국내/해외 OEM 제조사, 물류·배송사, 원부자재 공급사 등 외주 파트너와의 품질 이슈 커뮤니케이션 (전문 통역사 지원)</li>
-            <li>완제품 및 자재 품질 이슈 대응 및 관리 체계 강화</li>
-            <li>품질 관련 데이터 수집 및 분석</li>
-            <li>하자 분류 및 협력업체 배상 협의</li>
-          </ul>
-        </div>
+      <div class="card">
+        <h3 class="list-header" style="color: var(--accent);">주요 업무</h3>
+        <ul class="check-list" style="margin-bottom: 0;">
+          <li>국내/해외 OEM 제조사, 물류·배송사, 원부자재 공급사 등 외주 파트너와의 품질 이슈 커뮤니케이션 (전문통역사 지원)</li>
+          <li>완제품 및 자재 품질 이슈 대응 및 관리 체계 강화</li>
+          <li>품질 관련 데이터 수집 및 분석</li>
+          <li style="margin-bottom: 0;">하자 분류 및 협력업체 배상 협의</li>
+        </ul>
       </div>
     </section>
 
@@ -327,14 +356,14 @@
           <ul class="bullet-list" style="margin-bottom: 0;">
             <li>문제 해결 능력 및 분석적 사고 보유</li>
             <li>운전 가능자 (외근 시 업무용 차량 제공)</li>
-            <li>해외 여행 결격 사유가 없는 자</li>
+            <li style="margin-bottom: 0;">해외 여행 결격 사유가 없는 자</li>
           </ul>
         </div>
         <div class="card">
           <h3 class="list-header">우대 사항</h3>
           <ul class="bullet-list" style="margin-bottom: 0;">
             <li>매트리스 OEM 생산 품질 업무 경험자</li>
-            <li>매트리스 공장 품질 관리 경험자</li>
+            <li style="margin-bottom: 0;">매트리스 공장 품질 관리 경험자</li>
           </ul>
         </div>
       </div>
@@ -347,33 +376,19 @@
         복지 및 혜택
       </h2>
       <div class="card">
-        <div class="benefits-grid">
-          <div class="benefit-item">
-            <div class="benefit-icon">🍳</div>
-            <div class="benefit-title">식사/간식</div>
-            <div class="benefit-desc">회사 카드로 자유로운 아침 식사 제공,<br>간식 및 영양제 제공</div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon">💺</div>
-            <div class="benefit-title">업무 환경</div>
-            <div class="benefit-desc">개인 맞춤형 의자 지원,<br>최신식 컴퓨터·모니터·인체공학 기기 제공</div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon">📚</div>
-            <div class="benefit-title">성장 지원</div>
-            <div class="benefit-desc">무제한 도서 구입 지원</div>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon">🎁</div>
-            <div class="benefit-title">선물</div>
-            <div class="benefit-desc">명절 및 생일 선물 (개인 맞춤형)</div>
-          </div>
-        </div>
+        <ul class="check-list" style="margin-bottom: 0;">
+          <li>회사 카드로 자유로운 아침 식사 제공</li>
+          <li>개인 맞춤형 의자 지원</li>
+          <li>간식 및 영양제 제공</li>
+          <li>최신식 컴퓨터, 모니터, 인체공학적 기기 제공</li>
+          <li>무제한 도서 구입 지원</li>
+          <li style="margin-bottom: 0;">명절 및 생일 선물 (개인 맞춤형)</li>
+        </ul>
       </div>
     </section>
 
     <!-- WORKING & PROCESS -->
-    <section class="reveal" aria-label="근무 조건 및 채용 절차">
+    <section class="reveal" aria-label="근무 조건 및 지원 안내">
       <div class="content-grid work-process-grid">
         <div>
           <h2 class="section-title" style="font-size:1.6rem;">근무 조건</h2>
@@ -381,8 +396,7 @@
             <summary>고용 형태 및 급여</summary>
             <div class="details-content">
               <ul class="check-list" style="margin-bottom: 0;">
-                <li>정규직 (경력 채용)</li>
-                <li style="margin-bottom: 0;">급여 조건 : 면접 후 협의</li>
+                <li style="margin-bottom: 0;">급여 조건 : 경력에 따른 협의</li>
               </ul>
             </div>
           </details>
@@ -390,29 +404,30 @@
             <summary>근무 시간 및 장소</summary>
             <div class="details-content">
               <ul class="check-list" style="margin-bottom: 0;">
-                <li>서울 성동구 뚝섬로1길 63, 영창디지털타워 10층</li>
-                <li style="margin-bottom: 0;">2호선 뚝섬역 6번 출구 도보 1분</li>
+                <li style="margin-bottom: 16px;"><strong>근무지</strong><br>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">서울 성동구 뚝섬로1길 63, 영창디지털타워 10층<br>뚝섬역 6번 출구 도보 1분</span>
+                </li>
+                <li style="margin-bottom: 0;"><strong>외근</strong><br>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">외근 시 업무용 차량 제공</span>
+                </li>
               </ul>
             </div>
           </details>
         </div>
-        <div style="display: flex; flex-direction: column;">
+        <div>
           <h2 class="section-title" style="font-size:1.6rem;">지원 안내</h2>
-          <details open style="flex: 1;">
+          <details open>
             <summary>제출 서류 및 유의사항</summary>
             <div class="details-content">
               <ul class="check-list" style="margin-bottom: 24px;">
                 <li style="margin-bottom: 0;">
                   <strong>자유 양식의 국문 이력서 제출 필수</strong><br>
-                  <span style="display: block; margin-top: 8px; font-size: 0.95rem; opacity: 0.72; line-height: 1.7;">
-                    유사 양식이라면 모두 가능합니다.<br>
-                    단, 잡포탈(사람인, 잡코리아 등) 기본 양식은 진행이 어렵습니다.
-                  </span>
+                  <span style="font-size: 0.95rem; opacity: 0.72;">(단, 잡포탈 기본 이력서 양식 제외)</span>
                 </li>
               </ul>
-              <div style="background: var(--surface-hover); padding: 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.6; margin-top: 12px;">
-                <div style="white-space: nowrap;">※ 입사지원 서류에 허위사실이 발견될 경우,</div>
-                <div style="white-space: nowrap; padding-left: 20px;">채용 확정 이후라도 채용이 취소될 수 있습니다.</div>
+              <div style="background: var(--surface-hover); padding: 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.6;">
+                <div>※ 입사지원 서류에 허위사실이 발견될 경우,</div>
+                <div style="padding-left: 20px;">채용 확정 이후라도 채용이 취소될 수 있습니다.</div>
               </div>
             </div>
           </details>
@@ -435,27 +450,21 @@
           <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
           <div class="process-item active">
             <div class="process-number">2</div>
-            <div class="process-title">컬쳐핏 면접</div>
+            <div class="process-title">1차 면접</div>
           </div>
           <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
           <div class="process-item">
             <div class="process-number">3</div>
-            <div class="process-title">직무 면접</div>
-          </div>
-          <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
-          <div class="process-item">
-            <div class="process-number">4</div>
-            <div class="process-title">2차 인터뷰</div>
+            <div class="process-title">2차 면접</div>
           </div>
           <div class="process-arrow"><svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></div>
           <div class="process-item final">
-            <div class="process-number">5</div>
+            <div class="process-number">4</div>
             <div class="process-title">최종 합격</div>
-            <div class="process-text" style="color: rgba(255,255,255,0.9);">처우 협의</div>
           </div>
         </div>
         <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.95rem; opacity: 0.72; text-align: center;">
-          ※ 합격자 발생 시 공고가 조기 마감될 수 있습니다. 모든 면접은 1시간 가량 소요됩니다.
+          ※ 선발 절차 중 일부는 포지션 및 고용 형태에 따라 생략될 수 있습니다.
         </div>
       </div>
     </section>
@@ -502,6 +511,7 @@
   </main>
 
   <script>
+    // === Menu ===
     function toggleMenu() {
       var dropdown = document.getElementById('vizMenuDropdown');
       if (dropdown) dropdown.classList.toggle('open');
@@ -519,6 +529,7 @@
       }
     });
 
+    // === Theme ===
     var savedTheme = localStorage.getItem('viz-theme');
     var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     function applyTheme(t) {
@@ -531,21 +542,26 @@
     function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
     applyTheme(currentTheme);
 
+    // === Scroll Reveal ===
     var revealObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+    // === Download PNG ===
     async function downloadImage() {
       var menu = document.querySelector('.viz-menu');
       menu.style.display = 'none';
       try {
-        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2 });
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
         var a = document.createElement('a'); a.href = url;
         a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
       } catch(e) { console.error('Download failed:', e); }
       menu.style.display = '';
     }
+
+    var chartsBuilt = false;
+    function onThemeChange() {}
   </script>
 </body>
 </html>
