@@ -186,6 +186,14 @@
     ul.bullet-list { padding-left: 20px; color: var(--text); margin-bottom: 24px; }
     ul.bullet-list li { margin-bottom: 12px; font-size: 1.05rem; letter-spacing: -0.05em; word-break: keep-all; }
 
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+    }
+    .benefit-item { display: flex; flex-direction: column; gap: 12px; }
+    .benefit-icon { font-size: 2rem; background: var(--surface-hover); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin-bottom: 8px; }
+    .benefit-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .benefit-desc { color: var(--text); font-size: 0.95rem; word-break: keep-all; line-height: 1.6; opacity: 0.8; }
+
     .contact-card {
       background: var(--surface); border: 2px solid var(--border);
       border-radius: 16px; padding: 48px; text-align: center;
@@ -296,6 +304,16 @@
         밀도(수면밀도) 소개
       </h2>
       <div class="card">
+        <div class="content-grid" style="gap: 16px; margin-bottom: 32px;">
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li><strong style="opacity: 0.72;">밀도는 2022년 8월에 설립된 매트리스 스타트업으로, '수면밀도' 브랜드 운영</strong></li>
+            <li style="margin-bottom: 0;"><strong style="opacity: 0.72;">허리건강을 위한 매트리스 연구 및 개발, 설립 2년 만에 연 매출 200억 원 이상 달성한 빠르게 성장하는 기업</strong></li>
+          </ul>
+          <ul class="check-list" style="margin-bottom: 0;">
+            <li><strong style="opacity: 0.72;">밀도에서 일하는 것은 혁신과 도전의 연속, 정체되지 않고 끊임없이 변화할 기회 제공</strong></li>
+            <li style="margin-bottom: 0;"><strong style="opacity: 0.72;">새로운 시도에 도전하는 것을 즐기며, 성장과 성공을 최우선으로 삼는 인재 선호</strong></li>
+          </ul>
+        </div>
         <div style="padding: 24px; background: var(--surface-hover); border-radius: 12px;">
           <div style="font-size: 1.05rem; line-height: 1.6; word-break: keep-all;">
             <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px;">
@@ -336,10 +354,11 @@
       <div class="card">
         <h3 class="list-header" style="color: var(--accent);">주요 업무</h3>
         <ul class="check-list" style="margin-bottom: 0;">
-          <li>국내/해외 OEM 제조사, 물류·배송사, 원부자재 공급사 등 외주 파트너와의 품질 이슈 커뮤니케이션 (전문통역사 지원)</li>
-          <li>완제품 및 자재 품질 이슈 대응 및 관리 체계 강화</li>
+          <li>국내/해외 OEM 제조사, 물류 및 배송 서비스 업체, 원부자재 제조·공급사 등 외주 파트너와의 품질 이슈 커뮤니케이션 (※ 전문통역사 지원)</li>
+          <li>완제품 품질 이슈에 대한 대응 및 관리 체계 강화</li>
+          <li>자재 품질 이슈에 대한 대응 및 관리 체계 강화</li>
           <li>품질 관련 데이터 수집 및 분석</li>
-          <li style="margin-bottom: 0;">하자 분류 및 협력업체 배상 협의</li>
+          <li style="margin-bottom: 0;">하자 분류 및 하자 유형별 협력업체 배상 협의</li>
         </ul>
       </div>
     </section>
@@ -376,14 +395,38 @@
         복지 및 혜택
       </h2>
       <div class="card">
-        <ul class="check-list" style="margin-bottom: 0;">
-          <li>회사 카드로 자유로운 아침 식사 제공</li>
-          <li>개인 맞춤형 의자 지원</li>
-          <li>간식 및 영양제 제공</li>
-          <li>최신식 컴퓨터, 모니터, 인체공학적 기기 제공</li>
-          <li>무제한 도서 구입 지원</li>
-          <li style="margin-bottom: 0;">명절 및 생일 선물 (개인 맞춤형)</li>
-        </ul>
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">🍳</div>
+            <div class="benefit-title">브런치</div>
+            <div class="benefit-desc">밀도는 '일찍 시작하는 하루'를 중요하게 생각합니다.<br>바쁜 아침에도 여유롭게 식사할 수 있도록 회사 카드로 자유로운 아침 식사를 제공합니다.</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🪑</div>
+            <div class="benefit-title">맞춤형 의자</div>
+            <div class="benefit-desc">허리 건강을 연구하는 회사답게, 직원들의 건강을 소중히 여깁니다.<br>개인 맞춤형 의자를 제공하여 하루 종일 편안한 근무 환경을 지원합니다.</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🍫</div>
+            <div class="benefit-title">간식 및 영양제</div>
+            <div class="benefit-desc">열정적으로 일하는 구성원들을 위해 다양한 간식과 필요한 영양제를 제공합니다.<br>활력 있는 하루를 유지할 수 있도록 돕습니다.</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">💻</div>
+            <div class="benefit-title">건강한 작업 환경</div>
+            <div class="benefit-desc">최신식 컴퓨터, 모니터, 인체공학적 마우스·키보드·모니터 거치대를 제공합니다.<br>효율적이고 건강한 업무 환경을 만듭니다.</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">📚</div>
+            <div class="benefit-title">도서 구입 지원</div>
+            <div class="benefit-desc">지식과 배움의 여정에는 끝이 없습니다.<br>원하는 책을 무제한으로 구입 가능하며, 개인의 성장을 전폭적으로 지원합니다.</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🎁</div>
+            <div class="benefit-title">명절 및 생일 선물</div>
+            <div class="benefit-desc">직원 개개인의 취향과 필요를 고려한 맞춤형 선물을 제공합니다.<br>특별한 날에 감사와 응원의 마음을 전합니다.</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -404,11 +447,11 @@
             <summary>근무 시간 및 장소</summary>
             <div class="details-content">
               <ul class="check-list" style="margin-bottom: 0;">
-                <li style="margin-bottom: 16px;"><strong>근무지</strong><br>
-                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">서울 성동구 뚝섬로1길 63, 영창디지털타워 10층<br>뚝섬역 6번 출구 도보 1분</span>
+                <li style="margin-bottom: 16px;"><strong>근무시간</strong><br>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">08:00 ~ 17:00</span>
                 </li>
-                <li style="margin-bottom: 0;"><strong>외근</strong><br>
-                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">외근 시 업무용 차량 제공</span>
+                <li style="margin-bottom: 0;"><strong>근무지</strong><br>
+                  <span style="display: block; margin-top: 4px; font-size: 0.95rem; opacity: 0.72;">서울 성동구 뚝섬로1길 63, 영창디지털타워 10층<br>뚝섬역 6번 출구 도보 1분</span>
                 </li>
               </ul>
             </div>
