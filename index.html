@@ -380,6 +380,7 @@
     <!-- JOBS COUNT -->
     <div class="jobs-header">
       <span class="jobs-count"><strong id="visibleCount">0</strong>개의 공고</span>
+      <span id="adminTokenReset" style="display:none; font-size:0.82rem; color:var(--text-secondary); cursor:pointer; text-decoration:underline;" onclick="resetAdminToken()">토큰 변경</span>
     </div>
 
     <!-- JOB CARDS -->
@@ -691,6 +692,7 @@
     if (adminMode) {
       adminMode = false;
       document.getElementById('adminBtn').classList.remove('active');
+      document.getElementById('adminTokenReset').style.display = 'none';
       renderJobs();
       showAdminToast('관리자 모드 종료');
       return;
@@ -721,8 +723,20 @@
   function activateAdmin() {
     adminMode = true;
     document.getElementById('adminBtn').classList.add('active');
+    document.getElementById('adminTokenReset').style.display = 'inline';
     renderJobs();
     showAdminToast('관리자 모드 활성화 — 마감처리 버튼이 표시됩니다');
+  }
+
+  function resetAdminToken() {
+    ghToken = '';
+    localStorage.removeItem('gh_admin_token');
+    adminMode = false;
+    document.getElementById('adminBtn').classList.remove('active');
+    document.getElementById('adminTokenReset').style.display = 'none';
+    renderJobs();
+    document.getElementById('adminModalOverlay').classList.add('open');
+    setTimeout(function() { document.getElementById('adminTokenInput').focus(); }, 80);
   }
 
   document.addEventListener('keydown', function(e) {
