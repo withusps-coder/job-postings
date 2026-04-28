@@ -432,6 +432,20 @@
   <!-- ADMIN BUTTON -->
   <button class="admin-btn" id="adminBtn" onclick="toggleAdminMode()" title="관리자 모드">🔒</button>
 
+  <!-- ADMIN PIN MODAL -->
+  <div class="admin-modal-overlay" id="adminPinOverlay">
+    <div class="admin-modal">
+      <h3>🔒 관리자 인증</h3>
+      <p>6자리 키를 입력하세요.</p>
+      <input type="password" id="adminPinInput" placeholder="••••••" maxlength="6" autocomplete="off" inputmode="numeric">
+      <div id="adminPinError" style="color:#dc2626; font-size:0.85rem; margin-top:-8px; margin-bottom:12px; display:none;">키가 올바르지 않습니다.</div>
+      <div class="admin-modal-btns">
+        <button class="admin-modal-cancel" onclick="cancelAdminPin()">취소</button>
+        <button class="admin-modal-confirm" onclick="confirmAdminPin()">확인</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ADMIN TOKEN MODAL -->
   <div class="admin-modal-overlay" id="adminModalOverlay">
     <div class="admin-modal">
@@ -700,6 +714,28 @@
       showAdminToast('관리자 모드 종료');
       return;
     }
+    document.getElementById('adminPinInput').value = '';
+    document.getElementById('adminPinError').style.display = 'none';
+    document.getElementById('adminPinOverlay').classList.add('open');
+    setTimeout(function() { document.getElementById('adminPinInput').focus(); }, 80);
+  }
+
+  function cancelAdminPin() {
+    document.getElementById('adminPinOverlay').classList.remove('open');
+    document.getElementById('adminPinInput').value = '';
+    document.getElementById('adminPinError').style.display = 'none';
+  }
+
+  function confirmAdminPin() {
+    var pin = document.getElementById('adminPinInput').value.trim();
+    if (pin !== '832701') {
+      document.getElementById('adminPinError').style.display = 'block';
+      document.getElementById('adminPinInput').value = '';
+      document.getElementById('adminPinInput').focus();
+      return;
+    }
+    document.getElementById('adminPinOverlay').classList.remove('open');
+    document.getElementById('adminPinInput').value = '';
     if (ghToken) {
       activateAdmin();
     } else {
@@ -743,10 +779,12 @@
   }
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && document.getElementById('adminModalOverlay').classList.contains('open')) {
-      confirmAdminLogin();
+    if (e.key === 'Enter') {
+      if (document.getElementById('adminPinOverlay').classList.contains('open')) { confirmAdminPin(); return; }
+      if (document.getElementById('adminModalOverlay').classList.contains('open')) { confirmAdminLogin(); return; }
     }
     if (e.key === 'Escape') {
+      cancelAdminPin();
       cancelAdminLogin();
     }
   });
