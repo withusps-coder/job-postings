@@ -232,6 +232,78 @@
       .footer-contact { gap: 24px; }
       .filter-bar { gap: 6px; }
     }
+
+    /* ===== ADMIN ===== */
+    .admin-btn {
+      position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.2s;
+      opacity: 0.2;
+    }
+    .admin-btn:hover { opacity: 1; }
+    .admin-btn.active { opacity: 1; background: #fef3c7; border-color: #f59e0b; }
+
+    .admin-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.5); align-items: center; justify-content: center;
+    }
+    .admin-modal-overlay.open { display: flex; }
+    .admin-modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px; max-width: 400px; width: 90%;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+    }
+    .admin-modal h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .admin-modal p { color: var(--text-secondary); font-size: 0.93rem; line-height: 1.6; margin-bottom: 18px; }
+    .admin-modal input {
+      width: 100%; padding: 11px 14px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--text); font-family: inherit; font-size: 0.95rem;
+      margin-bottom: 16px; outline: none; box-sizing: border-box;
+    }
+    .admin-modal input:focus { border-color: var(--accent); }
+    .admin-modal-btns { display: flex; gap: 8px; justify-content: flex-end; }
+    .admin-modal-btns button {
+      padding: 10px 20px; border-radius: 8px; font-family: inherit;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.15s;
+    }
+    .admin-modal-btns button:hover { opacity: 0.85; }
+    .admin-modal-cancel { background: var(--surface-hover); color: var(--text-secondary); }
+    .admin-modal-confirm { background: var(--accent); color: white; }
+
+    .admin-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
+      background: #1f2937; color: white;
+      padding: 11px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+      z-index: 10001; opacity: 0; transition: all 0.25s; pointer-events: none; white-space: nowrap;
+    }
+    .admin-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .admin-toast.success { background: #059669; }
+    .admin-toast.error { background: #dc2626; }
+
+    .job-card-closed { opacity: 0.42; }
+    .job-admin-bar {
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .job-closed-tag {
+      font-size: 0.78rem; font-weight: 700; color: #6b7280;
+      background: #f3f4f6; padding: 3px 10px; border-radius: 999px; letter-spacing: 0.02em;
+    }
+    html.theme-dark .job-closed-tag { background: #374151; color: #9ca3af; }
+    .job-admin-btn {
+      padding: 5px 14px; border-radius: 6px; font-family: inherit;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer; border: none; transition: opacity 0.15s;
+    }
+    .job-admin-btn:hover { opacity: 0.75; }
+    .job-admin-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .job-admin-btn.close-btn { background: #fee2e2; color: #dc2626; }
+    .job-admin-btn.reopen-btn { background: #dcfce7; color: #16a34a; }
+    html.theme-dark .job-admin-btn.close-btn { background: rgba(220,38,38,0.18); }
+    html.theme-dark .job-admin-btn.reopen-btn { background: rgba(22,163,74,0.18); }
   </style>
 </head>
 <body>
@@ -355,6 +427,25 @@
     </div>
 
   </main>
+
+  <!-- ADMIN BUTTON -->
+  <button class="admin-btn" id="adminBtn" onclick="toggleAdminMode()" title="관리자 모드">🔒</button>
+
+  <!-- ADMIN TOKEN MODAL -->
+  <div class="admin-modal-overlay" id="adminModalOverlay">
+    <div class="admin-modal">
+      <h3>관리자 모드</h3>
+      <p>GitHub Personal Access Token을 입력하세요.<br>토큰은 이 브라우저에만 저장됩니다.</p>
+      <input type="password" id="adminTokenInput" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+      <div class="admin-modal-btns">
+        <button class="admin-modal-cancel" onclick="cancelAdminLogin()">취소</button>
+        <button class="admin-modal-confirm" onclick="confirmAdminLogin()">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN TOAST -->
+  <div class="admin-toast" id="adminToast"></div>
 
   <script>
   /* ================================================================
@@ -514,14 +605,15 @@
      ================================================================ */
   function renderJobs() {
     const filtered = JOBS.slice().reverse().filter(j => {
-      if (j.status === 'closed') return false;
+      if (!adminMode && j.status === 'closed') return false;
       return activeCategory === "전체" || j.category === activeCategory;
     });
 
     const grid = document.getElementById("jobsGrid");
     const empty = document.getElementById("emptyState");
 
-    document.getElementById("visibleCount").textContent = filtered.length;
+    const activeCount = filtered.filter(j => j.status !== 'closed').length;
+    document.getElementById("visibleCount").textContent = activeCount;
 
     if (filtered.length === 0) {
       grid.innerHTML = "";
@@ -536,11 +628,20 @@
         `<span class="job-meta-item">${m}</span>${idx < metaItems.length - 1 ? '<span class="job-meta-sep"></span>' : ''}`
       ).join("");
       const logoHtml = j.logo ? `<img class="job-logo" src="${j.logo}" alt="">` : '';
+      const isClosed = j.status === 'closed';
+      const adminBar = adminMode ? `
+        <div class="job-admin-bar">
+          ${isClosed
+            ? `<span class="job-closed-tag">마감됨</span><button class="job-admin-btn reopen-btn" data-job-id="${j.id}" onclick="event.preventDefault();toggleJobStatus('${j.id}')">재등록</button>`
+            : `<button class="job-admin-btn close-btn" data-job-id="${j.id}" onclick="event.preventDefault();toggleJobStatus('${j.id}')">마감처리</button>`
+          }
+        </div>` : '';
       return `
-        <a class="job-card" href="${j.url}">
+        <a class="job-card${isClosed ? ' job-card-closed' : ''}" href="${j.url}">
           <div class="job-logo-wrap">${logoHtml}</div>
           <div class="job-title">${j.title}</div>
           <div class="job-meta">${metaHtml}</div>
+          ${adminBar}
         </a>
       `;
     }).join("");
@@ -551,7 +652,7 @@
      ================================================================ */
   function animateHeroCount() {
     const el = document.getElementById("cntJobs");
-    const target = JOBS.length;
+    const target = JOBS.filter(j => j.status !== 'closed').length;
     const start = performance.now();
     const duration = 800;
     (function tick(now) {
@@ -577,6 +678,172 @@
   }
   function cycleTheme() { applyTheme(currentTheme === "dark" ? "light" : "dark"); }
   applyTheme(currentTheme);
+
+  /* ================================================================
+     ADMIN — GitHub API 연동 마감/재등록
+     ================================================================ */
+  var adminMode = false;
+  var ghToken = localStorage.getItem('gh_admin_token') || '';
+  var GH_OWNER = 'withusps-coder';
+  var GH_REPO  = 'job-postings';
+
+  function toggleAdminMode() {
+    if (adminMode) {
+      adminMode = false;
+      document.getElementById('adminBtn').classList.remove('active');
+      renderJobs();
+      showAdminToast('관리자 모드 종료');
+      return;
+    }
+    if (ghToken) {
+      activateAdmin();
+    } else {
+      document.getElementById('adminModalOverlay').classList.add('open');
+      setTimeout(function() { document.getElementById('adminTokenInput').focus(); }, 80);
+    }
+  }
+
+  function cancelAdminLogin() {
+    document.getElementById('adminModalOverlay').classList.remove('open');
+    document.getElementById('adminTokenInput').value = '';
+  }
+
+  function confirmAdminLogin() {
+    var token = document.getElementById('adminTokenInput').value.trim();
+    if (!token) return;
+    ghToken = token;
+    localStorage.setItem('gh_admin_token', token);
+    document.getElementById('adminModalOverlay').classList.remove('open');
+    document.getElementById('adminTokenInput').value = '';
+    activateAdmin();
+  }
+
+  function activateAdmin() {
+    adminMode = true;
+    document.getElementById('adminBtn').classList.add('active');
+    renderJobs();
+    showAdminToast('관리자 모드 활성화 — 마감처리 버튼이 표시됩니다');
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && document.getElementById('adminModalOverlay').classList.contains('open')) {
+      confirmAdminLogin();
+    }
+    if (e.key === 'Escape') {
+      cancelAdminLogin();
+    }
+  });
+
+  function showAdminToast(msg, type) {
+    var toast = document.getElementById('adminToast');
+    toast.textContent = msg;
+    toast.className = 'admin-toast show' + (type ? ' ' + type : '');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function() { toast.classList.remove('show'); }, 3200);
+  }
+
+  function toBase64Unicode(str) {
+    var bytes = new TextEncoder().encode(str);
+    var binary = Array.from(bytes, function(b) { return String.fromCharCode(b); }).join('');
+    return btoa(binary);
+  }
+
+  function fromBase64Unicode(b64) {
+    var clean = b64.replace(/\s/g, '');
+    var binary = atob(clean);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  async function ghGetFile(path) {
+    var res = await fetch('https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + path, {
+      headers: { Authorization: 'token ' + ghToken, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) throw new Error('GitHub API ' + res.status + ': ' + path);
+    return res.json();
+  }
+
+  async function ghUpdateFile(path, newContent, sha, message) {
+    var res = await fetch('https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + path, {
+      method: 'PUT',
+      headers: {
+        Authorization: 'token ' + ghToken,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: message, content: toBase64Unicode(newContent), sha: sha })
+    });
+    if (!res.ok) {
+      var err = await res.json().catch(function() { return {}; });
+      throw new Error((err.message || 'GitHub API error') + ' (' + res.status + ')');
+    }
+    return res.json();
+  }
+
+  function applyStatusToIndexContent(content, jobId, closing) {
+    var idStr = 'id: "' + jobId + '"';
+    var startIdx = content.indexOf(idStr);
+    if (startIdx === -1) throw new Error('JOBS 배열에서 ' + jobId + ' 를 찾을 수 없습니다');
+    var after = content.slice(startIdx);
+    var m = after.match(/\n    \}/);
+    if (!m) throw new Error(jobId + ' 의 닫는 괄호를 찾을 수 없습니다');
+    var blockEnd = startIdx + m.index;
+    var block = content.slice(startIdx, blockEnd);
+    if (closing) {
+      if (block.indexOf("status: 'closed'") !== -1) return content;
+      return content.slice(0, startIdx) + block + ",\n      status: 'closed'" + content.slice(blockEnd);
+    } else {
+      var newBlock = block.replace(/,?\n\s*status:\s*'closed'/, '');
+      return content.slice(0, startIdx) + newBlock + content.slice(blockEnd);
+    }
+  }
+
+  function applyBadgeToPostingContent(content, closing) {
+    if (closing) {
+      return content.replace('<span class="badge accent">채용 중</span>', '<span class="badge closed">마감</span>');
+    } else {
+      return content.replace('<span class="badge closed">마감</span>', '<span class="badge accent">채용 중</span>');
+    }
+  }
+
+  async function toggleJobStatus(jobId) {
+    var job = JOBS.find(function(j) { return j.id === jobId; });
+    if (!job) return;
+    var closing = job.status !== 'closed';
+    var label = closing ? '마감처리' : '재등록';
+
+    var btn = document.querySelector('[data-job-id="' + jobId + '"]');
+    if (btn) { btn.disabled = true; btn.textContent = '처리 중…'; }
+
+    try {
+      // 1. index.html 업데이트
+      var indexFile = await ghGetFile('index.html');
+      var indexContent = fromBase64Unicode(indexFile.content);
+      var newIndexContent = applyStatusToIndexContent(indexContent, jobId, closing);
+      await ghUpdateFile('index.html', newIndexContent, indexFile.sha,
+        (closing ? '마감' : '재등록') + ': ' + job.title);
+
+      // 2. 개별 공고 페이지 배지 업데이트
+      var postingPath = job.url.replace('./', '');
+      var postingFile = await ghGetFile(postingPath);
+      var postingContent = fromBase64Unicode(postingFile.content);
+      var newPostingContent = applyBadgeToPostingContent(postingContent, closing);
+      await ghUpdateFile(postingPath, newPostingContent, postingFile.sha,
+        (closing ? '마감' : '재등록') + ' 배지: ' + job.title);
+
+      // 로컬 상태 업데이트
+      if (closing) job.status = 'closed';
+      else delete job.status;
+
+      showAdminToast(label + ' 완료 — GitHub Pages 반영까지 약 1분 소요', 'success');
+      renderJobs();
+    } catch (e) {
+      console.error(e);
+      showAdminToast('오류: ' + e.message, 'error');
+      if (btn) { btn.disabled = false; btn.textContent = closing ? '마감처리' : '재등록'; }
+    }
+  }
 
   /* ================================================================
      START
