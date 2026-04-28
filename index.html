@@ -514,6 +514,7 @@
      ================================================================ */
   function renderJobs() {
     const filtered = JOBS.slice().reverse().filter(j => {
+      if (j.status === 'closed') return false;
       return activeCategory === "전체" || j.category === activeCategory;
     });
 
