@@ -10,14 +10,37 @@
       "binding": "DB",
       "database_name": "majesty-recruiting-production",
       "database_id": "dd28c2c5-67fb-4984-820f-676d1fad7150",
-      "preview_database_id": "08bba057-c65b-40ca-bf62-9a855caeba56",
     },
   ],
   "r2_buckets": [
     {
       "binding": "JOB_MEDIA",
       "bucket_name": "majesty-recruiting-media-production",
-      "preview_bucket_name": "majesty-recruiting-media-staging",
     },
   ],
+  "env": {
+    "preview": {
+      "vars": {
+        "DEPLOYMENT_ENVIRONMENT": "staging",
+        "STAGING_CANONICAL_HOST": "staging.majesty-recruiting.pages.dev",
+        "STAGING_PAGES_HOST": "staging.majesty-recruiting.pages.dev",
+        "STAGING_CANONICAL_ORIGIN": "https://staging.majesty-recruiting.pages.dev",
+        "STAGING_ACCESS_ISSUER": "https://patient-mode-128b.cloudflareaccess.com",
+        "STAGING_ACCESS_AUDIENCE": "43e6b2fe4a5d3f784643a10e6a2cce664932b3807e5ab1670f2f54caa9c2afaa",
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "majesty-recruiting-staging",
+          "database_id": "08bba057-c65b-40ca-bf62-9a855caeba56",
+        },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "JOB_MEDIA",
+          "bucket_name": "majesty-recruiting-media-staging",
+        },
+      ],
+    },
+  },
 }
