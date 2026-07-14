@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "sample-rich",
+  "slug": "sample-rich",
+  "status": "closed",
+  "closedState": "This position is closed.",
+  "datePosted": "2026-07-10",
+  "publisherAuthorization": {
+    "authorized": true,
+    "scope": "published-job",
+    "attestedAt": "2026-07-10T00:00:00.000Z"
+  },
+  "title": "Sample rich role",
+  "category": "Design",
+  "company": {
+    "name": "Sample Company",
+    "website": "https://example.com",
+    "summary": "A sample hiring organization.",
+    "logo": "src/assets/brand/favicon.png",
+    "heroImage": "src/assets/brand/favicon.png"
+  },
+  "employment": "full-time",
+  "location": "Seoul",
+  "remote": "remote",
+  "experience": "5+ years",
+  "tags": ["design", "product"],
+  "sections": {
+    "stats": [{ "label": "Team", "value": "Design" }],
+    "company": ["A focused team."],
+    "news": [{ "label": "News", "url": "https://example.com/news" }],
+    "responsibilities": ["Lead product design."],
+    "qualifications": ["Relevant experience."],
+    "preferred": ["Korean fluency."],
+    "benefits": ["Flexible work."],
+    "conditions": ["Full-time employment."],
+    "process": ["Screening then interviews."],
+    "notes": ["Portfolio required."]
+  },
+  "documents": [
+    { "label": "Profile", "url": "https://example.com/profile.pdf" }
+  ],
+  "officialStartingApplicationUrl": "https://starting.kr/jobs/sample-rich"
+}

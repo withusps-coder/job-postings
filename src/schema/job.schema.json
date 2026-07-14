@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://majesty-recruiting.example/schema/job.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "slug",
+    "status",
+    "datePosted",
+    "publisherAuthorization",
+    "title",
+    "category",
+    "company",
+    "employment",
+    "location",
+    "remote",
+    "experience",
+    "tags",
+    "sections"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "$ref": "#/$defs/slug" },
+    "slug": { "$ref": "#/$defs/slug" },
+    "status": { "enum": ["open", "closed"] },
+    "closedState": { "$ref": "#/$defs/text" },
+    "datePosted": { "$ref": "#/$defs/date" },
+    "publisherAuthorization": { "$ref": "#/$defs/authorization" },
+    "title": { "$ref": "#/$defs/text" },
+    "category": { "$ref": "#/$defs/text" },
+    "company": { "$ref": "#/$defs/publishedCompany" },
+    "employment": { "$ref": "#/$defs/text" },
+    "location": { "$ref": "#/$defs/text" },
+    "mapQuery": { "$ref": "#/$defs/text" },
+    "mapImage": { "$ref": "#/$defs/localImage" },
+    "remote": { "enum": ["onsite", "hybrid", "remote"] },
+    "experience": { "$ref": "#/$defs/text" },
+    "tags": { "$ref": "#/$defs/textList" },
+    "sections": { "$ref": "#/$defs/sections" },
+    "documents": { "$ref": "#/$defs/documents" },
+    "officialStartingApplicationUrl": { "$ref": "#/$defs/httpsUrl" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "closed" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": { "closedState": true },
+        "required": ["closedState"]
+      }
+    }
+  ],
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 80
+    },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "dateTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{3})?Z$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "^[^<>]*$"
+    },
+    "textList": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s<>]+$",
+      "maxLength": 2048
+    },
+    "localImage": {
+      "type": "string",
+      "pattern": "^src/assets/(?!.*\\.\\.)[a-z0-9][a-z0-9._/-]*\\.(?:png|jpe?g|webp)$",
+      "maxLength": 240
+    },
+    "localPdf": {
+      "type": "string",
+      "pattern": "^src/assets/(?!.*\\.\\.)[a-z0-9][a-z0-9._/-]*\\.pdf$",
+      "maxLength": 240
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authorized", "scope", "attestedAt"],
+      "properties": {
+        "authorized": { "const": true },
+        "scope": { "const": "published-job" },
+        "attestedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "publishedCompany": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "website", "summary", "logo"],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "website": { "$ref": "#/$defs/httpsUrl" },
+        "summary": { "$ref": "#/$defs/text" },
+        "logo": { "$ref": "#/$defs/localImage" },
+        "heroImage": { "$ref": "#/$defs/localImage" }
+      }
+    },
+    "stat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "$ref": "#/$defs/text" },
+        "value": { "$ref": "#/$defs/text" }
+      }
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "url"],
+      "properties": {
+        "label": { "$ref": "#/$defs/text" },
+        "url": { "$ref": "#/$defs/httpsUrl" }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["responsibilities", "qualifications"],
+      "properties": {
+        "stats": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/stat" }
+        },
+        "company": { "$ref": "#/$defs/textList" },
+        "news": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/link" }
+        },
+        "responsibilities": { "$ref": "#/$defs/textList" },
+        "qualifications": { "$ref": "#/$defs/textList" },
+        "preferred": { "$ref": "#/$defs/textList" },
+        "benefits": { "$ref": "#/$defs/textList" },
+        "conditions": { "$ref": "#/$defs/textList" },
+        "process": { "$ref": "#/$defs/textList" },
+        "notes": { "$ref": "#/$defs/textList" }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "url"],
+      "properties": {
+        "label": { "$ref": "#/$defs/text" },
+        "url": {
+          "oneOf": [
+            { "$ref": "#/$defs/localPdf" },
+            { "$ref": "#/$defs/httpsUrl" }
+          ]
+        }
+      }
+    },
+    "documents": {
+      "type": "array",
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/document" }
+    }
+  }
+}

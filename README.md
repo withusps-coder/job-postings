@@ -1,43 +1,22 @@
 # 채용 공고 | 스타팅파트너스
 
-스타팅파트너스가 추천하는 성장하는 기업들의 채용 공고 모음입니다.
+스타팅파트너스 소속 헤드헌터가 검토한 채용 공고를 제공하는 Cloudflare Pages 애플리케이션입니다.
 
-## 메인 화면
+## 현재 운영 모델
 
-**[채용 공고 메인 페이지 바로가기 →](https://withusps-coder.github.io/job-postings/)**
+- 공개 목록·상세·사이트맵은 D1의 활성 immutable revision만 읽습니다.
+- 관리자 화면과 API는 exact canonical host 및 Cloudflare Access로 보호됩니다.
+- 이미지는 private R2에 create-only 객체로 보관하며 공개 Function은 retained revision에 연결된 자산만 제공합니다.
+- 공고 작성·게시·마감·복원은 관리자 API의 durable idempotent operation으로 처리합니다.
+- 저장소 JSON, 생성된 공고 HTML, GitHub Pages 및 기존 브라우저 PIN/PAT 흐름은 운영 authority나 fallback이 아닙니다.
 
----
+운영 주소와 production/staging 리소스는 승인된 비공개 배포 inventory에서 관리합니다. Pages preview alias나 과거 GitHub Pages 주소를 운영 링크로 사용하지 않습니다.
 
-## 채용 공고 목록
+## 로컬 검증
 
-### 에이블런 (ABlearn)
+```sh
+npm install
+npm run check
+```
 
-| 직무 | 링크 |
-|------|------|
-| 경영지원(회계, 인사총무) 팀장 | [공고 보기](https://withusps-coder.github.io/job-postings/ablearn-admin/) |
-| 사업개발(B2B 영업) 매니저 | [공고 보기](https://withusps-coder.github.io/job-postings/ablearn-b2b/) |
-| 풀스택 마케팅 | [공고 보기](https://withusps-coder.github.io/job-postings/ablearn-marketing/) |
-| 사업 전략 기획 | [공고 보기](https://withusps-coder.github.io/job-postings/ablearn-strategy/) |
-
-### 마리오쇼핑 (Mario Shopping)
-
-| 직무 | 링크 |
-|------|------|
-| 임원 비서 | [공고 보기](https://withusps-coder.github.io/job-postings/mario-secretary/) |
-| 사업기획팀 사업관리 | [공고 보기](https://withusps-coder.github.io/job-postings/mario-shopping/) |
-| 사업기획팀 매장관리 | [공고 보기](https://withusps-coder.github.io/job-postings/mario-store-mgmt/) |
-
-### 밀도 (Mildo)
-
-| 직무 | 링크 |
-|------|------|
-| 수면밀도 품질 담당자 | [공고 보기](https://withusps-coder.github.io/job-postings/mildo/) |
-| 수면밀도 그래픽 디자이너 | [공고 보기](https://withusps-coder.github.io/job-postings/mildo-design/) |
-
----
-
-## 소개
-
-이 레포지터리는 스타팅파트너스에서 추천하는 기업들의 채용 공고를 GitHub Pages를 통해 호스팅합니다. 각 공고는 독립적인 HTML 파일로 구성되어 있으며 라이트/다크 모드를 지원합니다.
-
-> 문의: [스타팅파트너스](https://starting.kr/)
+로컬 Pages 실행과 D1 migration 절차, 실제 staging/production cutover 및 rollback gate는 `docs/runbooks/deployment.md`를 따릅니다. 관리자 보안·자격 증명 대응은 `docs/runbooks/security.md`를 따릅니다.

@@ -1,0 +1,14 @@
+DEPLOYMENT_ENVIRONMENT=staging
+PUBLIC_CANONICAL_HOST=staging.example.invalid
+PUBLIC_PAGES_HOST=public-placeholder.pages.dev
+PUBLIC_CANONICAL_ORIGIN=https://staging.example.invalid
+PUBLIC_ACCESS_ISSUER=https://public-placeholder.cloudflareaccess.com
+PUBLIC_ACCESS_AUDIENCE=public-access-audience-placeholder
+PUBLIC_ADMIN_EMAIL=public-admin@example.invalid
+STAGING_CANONICAL_HOST=staging.example.invalid
+STAGING_PAGES_HOST=staging-placeholder.pages.dev
+STAGING_CANONICAL_ORIGIN=https://staging.example.invalid
+STAGING_ACCESS_ISSUER=https://staging-placeholder.cloudflareaccess.com
+STAGING_ACCESS_AUDIENCE=staging-access-audience-placeholder
+STAGING_ADMIN_EMAIL=staging-admin@example.invalid
+CSRF_SIGNING_SECRET=REPLACE_WITH_32_BYTE_BASE64URL_SECRET

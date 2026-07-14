@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/assets/*",
+    "/robots.txt",
+    "/manifest.webmanifest",
+    "/favicon.ico",
+    "/404.html",
+    "/build-meta.json"
+  ]
+}

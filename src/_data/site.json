@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "name": "금문섭",
+    "role": "헤드헌터",
+    "affiliation": "스타팅파트너스 소속"
+  },
+  "contactEmail": "majesty89@starting.kr",
+  "linkedinUrl": "https://www.linkedin.com/in/majesty89/",
+  "brand": {
+    "wordmarkPath": "src/assets/brand/starting-text-black.svg",
+    "faviconPath": "src/assets/brand/favicon.png"
+  },
+  "approvalReceipt": {
+    "scope": "personal-recruiter-site",
+    "contactConfirmed": true,
+    "approvedAt": "2026-07-11"
+  }
+}

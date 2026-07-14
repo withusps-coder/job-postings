@@ -1,0 +1,12 @@
+node_modules/
+_site/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+playwright-report/
+test-results/
+coverage/
+.DS_Store
+.gjc/
+.omo/

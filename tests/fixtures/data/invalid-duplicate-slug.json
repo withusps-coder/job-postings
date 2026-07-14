@@ -1,0 +1,60 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "sample-one",
+    "slug": "same-slug",
+    "status": "open",
+    "datePosted": "2026-07-10",
+    "publisherAuthorization": {
+      "authorized": true,
+      "scope": "published-job",
+      "attestedAt": "2026-07-10T00:00:00.000Z"
+    },
+    "title": "Sample one",
+    "category": "Operations",
+    "company": {
+      "name": "Sample Company",
+      "website": "https://example.com",
+      "summary": "A sample hiring organization.",
+      "logo": "src/assets/brand/favicon.png"
+    },
+    "employment": "full-time",
+    "location": "Seoul",
+    "remote": "hybrid",
+    "experience": "3+ years",
+    "tags": ["operations"],
+    "sections": {
+      "responsibilities": ["Own operations."],
+      "qualifications": ["Relevant experience."]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "sample-two",
+    "slug": "same-slug",
+    "status": "open",
+    "datePosted": "2026-07-10",
+    "publisherAuthorization": {
+      "authorized": true,
+      "scope": "published-job",
+      "attestedAt": "2026-07-10T00:00:00.000Z"
+    },
+    "title": "Sample two",
+    "category": "Operations",
+    "company": {
+      "name": "Sample Company",
+      "website": "https://example.com",
+      "summary": "A sample hiring organization.",
+      "logo": "src/assets/brand/favicon.png"
+    },
+    "employment": "full-time",
+    "location": "Seoul",
+    "remote": "hybrid",
+    "experience": "3+ years",
+    "tags": ["operations"],
+    "sections": {
+      "responsibilities": ["Own operations."],
+      "qualifications": ["Relevant experience."]
+    }
+  }
+]

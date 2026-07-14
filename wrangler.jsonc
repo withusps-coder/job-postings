@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "majesty-recruiting",
+  "pages_build_output_dir": "./_site",
+  "compatibility_date": "2026-07-10",
+  // Pages binds DB and JOB_MEDIA to isolated production and preview resources.
+  // R2 uses isolated private production and preview buckets.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "majesty-recruiting-production",
+      "database_id": "dd28c2c5-67fb-4984-820f-676d1fad7150",
+      "preview_database_id": "08bba057-c65b-40ca-bf62-9a855caeba56",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "JOB_MEDIA",
+      "bucket_name": "majesty-recruiting-media-production",
+      "preview_bucket_name": "majesty-recruiting-media-staging",
+    },
+  ],
+}

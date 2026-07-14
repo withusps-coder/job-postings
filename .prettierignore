@@ -1,0 +1,8 @@
+node_modules/
+_site/
+.wrangler/
+playwright-report/
+test-results/
+.omo/
+*.html
+package-lock.json

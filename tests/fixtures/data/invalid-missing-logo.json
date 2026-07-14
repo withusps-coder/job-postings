@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "sample-minimal",
+  "slug": "sample-minimal",
+  "status": "open",
+  "datePosted": "2026-07-10",
+  "publisherAuthorization": {
+    "authorized": true,
+    "scope": "published-job",
+    "attestedAt": "2026-07-10T00:00:00.000Z"
+  },
+  "title": "Sample role",
+  "category": "Operations",
+  "company": {
+    "name": "Sample Company",
+    "website": "https://example.com",
+    "summary": "A sample hiring organization."
+  },
+  "employment": "full-time",
+  "location": "Seoul",
+  "remote": "hybrid",
+  "experience": "3+ years",
+  "tags": ["operations"],
+  "sections": {
+    "responsibilities": ["Own operations."],
+    "qualifications": ["Relevant experience."]
+  }
+}
